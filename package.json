@@ -1,0 +1,29 @@
+{
+  "name": "stmarket",
+  "version": "1.0.0",
+  "description": "서울과학기술대학교 중고 거래 플랫폼",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sara0813/web2024.git"
+  },
+  "keywords": [
+    "중고거래",
+    "중고마켓",
+    "ST마켓",
+    "학생전용"
+  ],
+  "author": "sara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sara0813/web2024/issues"
+  },
+  "homepage": "https://github.com/sara0813/web2024#readme",
+  "dependencies": {
+    "express": "^4.21.1",
+    "mongoose": "^8.8.0"
+  }
+}
