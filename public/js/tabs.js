@@ -14,4 +14,20 @@ function f4() {
 	location.href = '../html/profile.html';
 	}
 
+function f1a() {
+    location.href = 'public/html/register.html';
+}
+
+function f2a() {
+    location.href = 'public/html/search.html';
+}
+
+function f3a() {
+    location.href = 'public/html/messages.html';
+}
+
+function f4a() {
+    location.href = 'public/html/profile.html';
+}
+
 document.oncontextmenu = function(){return false;}
