@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 
 // 정적 파일 제공 (HTML, CSS, JS 파일 등)
-app.use(express.static(path.join(__dirname, '../public'))); // 정적 파일 경로 설정
+app.use(express.static(path.join(__dirname, '../public'))); // 정적 파일 경로 수정
 
 // 기본 라우트 설정
 app.get('/', (req, res) => {
