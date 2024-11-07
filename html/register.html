@@ -14,22 +14,23 @@
     </header>
 
     <nav class="tabs">
-        <input type="radio" id="tab-register" name="tab" onclick="f1()";>
+        <input type="radio" id="tab-register" name="tab" onclick="f1()">
         <label for="tab-register">등록</label>
     
-        <input type="radio" id="tab-search" name="tab" onclick="f2()";>
+        <input type="radio" id="tab-search" name="tab" onclick="f2()">
         <label for="tab-search">검색</label>
     
-        <input type="radio" id="tab-messages" name="tab"onclick="f3()";>
+        <input type="radio" id="tab-messages" name="tab"onclick="f3()">
         <label for="tab-messages">메시지</label>
     
-        <input type="radio" id="tab-profile" name="tab" onclick="f4()";>
+        <input type="radio" id="tab-profile" name="tab" onclick="f4()">
         <label for="tab-profile">마이페이지</label>
     </nav>        
 
     <section id="tab-content">
         <h2>등록 페이지</h2>
-        <!-- 제목 -->
+        <form action="/submit-product" method="POST" enctype="multipart/form-data">
+            <!-- 제목 -->
         <div class="form-group">
             <label for="product-name">제목</label>
             <input type="text" id="product-name" name="product-name" placeholder="상품 이름을 입력하세요" required>
@@ -70,9 +71,8 @@
         <div class="form-group">
             <button type="submit">상품 등록</button>
         </div>
-    </form>
-</div>
-
+        </div>
+        </form>
     </section>
 </body>
 </html>
