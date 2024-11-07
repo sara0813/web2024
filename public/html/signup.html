@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/signup.css">
+    <script src="/js/tabs.js"></script>
+</head>
+<body>
+    <header>
+        <h1><a href="/">ST 마켓</a></h1>
+        <div class="header-buttons">
+            <button id="login-btn" onclick="location.href='/html/login.html'">로그인</button>
+        </div>
+    </header>
+
+    <nav class="tabs">
+        <input type="radio" id="tab-register" name="tab" onclick="f1();">
+        <label for="tab-register">등록</label>
+    
+        <input type="radio" id="tab-search" name="tab" onclick="f2();">
+        <label for="tab-search">검색</label>
+    
+        <input type="radio" id="tab-messages" name="tab" onclick="f3();">
+        <label for="tab-messages">메시지</label>
+    
+        <input type="radio" id="tab-profile" name="tab" onclick="f4();">
+        <label for="tab-profile">마이페이지</label>
+    </nav> 
+
+    <div class="container">
+        <h1>회원가입</h1>
+        <form id="signup-form">
+            <div class="form-group">
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" placeholder="닉네임을 입력해주세요." required>
+                <button type="button" id="check-nickname-btn" onclick="checkNickname()">중복 체크</button>
+                <div id="nickname-error" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="student-id">학번</label>
+                <input type="text" id="student-id" maxlength="8" placeholder="학번을 입력해주세요." oninput="validateStudentId()" />
+                <div id="student-id-error" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" placeholder="학교 이메일 계정을 입력해주세요." required />
+                <div id="email-error" class="error"></div>
+                <button type="button" id="verify-email-btn" onclick="sendEmailVerification()">인증</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="email-verification">인증 코드</label>
+                <input type="text" id="email-verification" placeholder="인증 코드를 입력해주세요." required>
+                <div id="email-verification-error" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" placeholder="비밀번호를 입력해주세요." required>
+                <div id="password-error" class="error">
+            </div> 
+
+            <div class="form-group">
+                <label for="confirm-password">비밀번호 확인</label>
+                <input type="password" id="confirm-password" placeholder="비밀번호를 재입력해주세요." required>
+                <div id="confirm-password-error" class="error"></div>
+            </div>
+
+            <div class="checkbox-group">
+                <label>
+                    <br><input type="checkbox" id="privacy-policy" required> 개인정보 처리방침에 동의합니다.
+                </label><br><br>
+                <label>
+                    <input type="checkbox" id="terms-of-service" required> 이용약관에 동의합니다.
+                </label>
+            </div>
+
+            <button type="button" id="signup-btn" onclick="register()">회원가입</button>
+        </form>
+    </div>
+
+    <script src="/js/signup/signup.js"></script>
+    <script src="/js/signup/signupName.js"></script>
+    <script src="/js/signup/signupId.js"></script>
+    <script src="/js/signup/signupPw.js"></script>
+    <script src ="/js/signup/signupEmail.js"></script>
+</body>
+</html>

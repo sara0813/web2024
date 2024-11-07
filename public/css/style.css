@@ -7,15 +7,68 @@ body {
 }
 
 header {
-    background-color: #6c757d; /* 회색 배경 */
-    padding: 20px; /* 패딩 설정 */
-    text-align: center; /* 텍스트 가운데 정렬 */
+    background-color: #a5aaae;
+    padding: 35px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
 }
 
 header h1 a {
-    color: #fff; /* 링크 텍스트 색상 흰색 */
-    text-decoration: none; /* 링크 밑줄 제거 */
-    font-size: 24px; /* 글씨 크기 설정 */
+    color: #ffffff; /* 기본 텍스트 색상 */
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: bold;
+    transition: color 0.3s ease, box-shadow 0.3s ease; /* 색상과 그림자 전환 효과 */
+}
+
+header h1 a:hover {
+    background-color: #8d9194; /* 진한 회색으로 호버 시 강조 */
+    color: #fff; /* 글자색 흰색 유지 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+header h1 a:active {
+    background-color: #6d7073; /* 클릭 시 더 진한 회색 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* 클릭 시 그림자 축소 */
+}
+
+/* 버튼을 묶은 컨테이너 스타일 */
+.header-buttons {
+    position: absolute;
+    top: 10px; /* 위쪽 여백 */
+    right: 20px; /* 오른쪽 여백 */
+    display: flex;
+    gap: 10px;
+}
+
+/* 버튼 스타일 - 헤더와 동일한 회색 배경 */
+#register-btn, #login-btn {
+    padding: 6px 12px;
+    background-color: #a5aaae; /* 헤더와 동일한 회색 배경 */
+    color: #fff; /* 글자색 흰색 */
+    border: 1px solid #a5aaae; /* 테두리도 동일한 색으로 */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+/* 버튼 호버 효과 - 진한 회색 배경으로 강조 */
+#register-btn:hover, #login-btn:hover {
+    background-color: #8d9194; /* 진한 회색으로 호버 시 강조 */
+    color: #fff; /* 글자색 흰색 유지 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 추가 */
+}
+
+/* 버튼 클릭 효과 */
+#register-btn:active, #login-btn:active {
+    background-color: #6d7073; /* 클릭 시 더 진한 회색 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 클릭 시 그림자 축소 */
 }
 
 nav.tabs {
@@ -42,13 +95,12 @@ nav.tabs label {
 }
 
 nav.tabs label:hover {
-    background-color: #007bff; /* 마우스 오버 시 파란색 배경 */
+    background-color: #a5aaae; /* 마우스 오버 시 회색 배경 */
     color: white; /* 마우스 오버 시 텍스트 색상 흰색 */
     transform: scale(1.05); /* 마우스 오버 시 크기 증가 */
 }
 
 nav.tabs input[type="radio"]:checked + label {
-    background-color: #dc3545; /* 선택된 탭 빨간색 배경 */
     color: white; /* 선택된 탭 텍스트 색상 흰색 */
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3); /* 선택된 탭의 내부 그림자 효과 */
 }

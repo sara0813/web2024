@@ -4,12 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ST 마켓</title>
-    <link rel="stylesheet" href="public/css/style.css">
-    <script src="public/js/tabs.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/tabs.js" defer></script>
+    <script src=""></script>
 </head>
 <body oncontextmenu='return false' >
     <header>
-        <h1><a href="index.html">ST 마켓</a></h1>
+        <h1><a href="/">ST 마켓</a></h1>
+        <div class="header-buttons">
+            <button id="register-btn" onclick="location.href='../html/signup.html'">회원가입</button>
+            <button id="login-btn" onclick="location.href='../html/login.html'">로그인</button>
+        </div>
     </header>
 
     <nav class="tabs">
