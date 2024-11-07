@@ -1,18 +1,14 @@
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon'); // serve-favicon 패키지 추가
 const app = express();
 const port = 3000;
 
-// favicon 경로 설정
-app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')));
-
-// 정적 파일 제공
-app.use(express.static(path.join(__dirname, '../public')));
+// 정적 파일 제공 (css, js, html 폴더에 접근)
+app.use(express.static(path.join(__dirname, '../'))); // 최상위 폴더의 파일들 제공
 
 // 기본 라우트 설정
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
+    res.sendFile(path.join(__dirname, '../index.html')); // 최상위 폴더의 index.html
 });
 
 // 서버 시작
