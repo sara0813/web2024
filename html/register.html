@@ -4,75 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ST 마켓 - 등록</title>
+    <link rel="stylesheet" href="../css/register.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/tabs.js" defer></script>
-
 </head>
 <body>
     <header>
-        <h1><a href="/">ST 마켓</a></h1>
+        <h1><a href="../index.html">ST 마켓</a></h1>
     </header>
 
     <nav class="tabs">
         <input type="radio" id="tab-register" name="tab" onclick="f1()">
-        <label for="tab-register">등록</label>
+        <label for="tab-register">상품 등록</label>
     
         <input type="radio" id="tab-search" name="tab" onclick="f2()">
-        <label for="tab-search">검색</label>
+        <label for="tab-search">상품 검색</label>
     
         <input type="radio" id="tab-messages" name="tab"onclick="f3()">
-        <label for="tab-messages">메시지</label>
+        <label for="tab-messages">채팅</label>
     
         <input type="radio" id="tab-profile" name="tab" onclick="f4()">
         <label for="tab-profile">마이페이지</label>
     </nav>        
 
-    <section id="tab-content">
-        <h2>등록 페이지</h2>
-        <form action="/submit-product" method="POST" enctype="multipart/form-data">
-            <!-- 제목 -->
-        <div class="form-group">
-            <label for="product-name">제목</label>
-            <input type="text" id="product-name" name="product-name" placeholder="상품 이름을 입력하세요" required>
-        </div>
+    <div class="container">
+        <section id="tab-content">
+            <h2 id="product-register-title">판매할 상품을 등록 해주세요</h2>
+            
+            <form action="/submit-product" method="POST" enctype="multipart/form-data">
+            
+                <!-- 제목 -->
+                <div class="form-group">
+                    <label for="product-name">제목</label>
+                    <input type="text" id="product-name" name="product-name" placeholder="상품 이름을 입력하세요" required>
+                </div>
 
-        <!-- 상품 설명 -->
-        <div class="form-group">
-            <label for="product-description">상품 설명</label>
-            <textarea id="product-description" name="product-description" placeholder="상품에 대한 자세한 설명을 입력하세요" required></textarea>
-        </div>
+                <div class="form-group">
+                    <label>카테고리</label>
+                    <div class="category-buttons">
+                        <button type="button" data-category="electronics" onclick="selectCategory('electronics')">전자기기</button>
+                        <button type="button" data-category="kitchen" onclick="selectCategory('kitchen')">생활용품</button>
+                        <button type="button" data-category="cosmetics" onclick="selectCategory('cosmetics')">화장품</button>
+                        <button type="button" data-category="clothing" onclick="selectCategory('clothing')">의류</button>
+                        <button type="button" data-category="books" onclick="selectCategory('books')">도서</button>
+                        <button type="button" data-category="furniture" onclick="selectCategory('furniture')">가구</button>
+                        <button type="button" data-category="others" onclick="selectCategory('others')">기타</button>
+                    </div>
+                    <input type="hidden" id="product-category" name="product-category" required>
+                </div>
+                <script src="../js/register/category.js"></script>   
 
-        <!-- 상품 가격 -->
-        <div class="form-group">
-            <label for="product-price">가격 (원)</label>
-            <input type="number" id="product-price" name="product-price" placeholder="상품 가격을 입력하세요" required min="1">
-        </div>
+                <!-- 상품 설명 -->
+                <div class="form-group">
+                    <label for="product-description">상품 설명</label>
+                    <textarea id="product-description" name="product-description" placeholder="상품에 대한 자세한 설명을 입력하세요" required></textarea>
+                </div>
 
-        <!-- 카테고리 선택 -->
-        <div class="form-group">
-            <label for="product-category">카테고리</label>
-            <select id="product-category" name="product-category" required>
-                <option value="">카테고리를 선택하세요</option>
-                <option value="electronics">전자기기</option>
-                <option value="clothing">의류</option>
-                <option value="books">도서</option>
-                <option value="furniture">가구</option>
-                <option value="others">기타</option>
-            </select>
-        </div>
+                <!-- 상품 가격 -->
+                <div class="form-group">
+                    <label for="product-price">가격 (원)</label>
+                    <input type="number" id="product-price" name="product-price" placeholder="상품 가격을 입력하세요" required min="1">
+                </div>
 
-        <!-- 상품 이미지 -->
-        <div class="form-group">
-            <label for="product-image">상품 이미지</label>
-            <input type="file" id="product-image" name="product-image" accept="image/*" required>
-        </div>
+                <!-- 상품 이미지 -->
+                <div class="form-group">
+                    <label for="product-image">사진을 업로드해주세요:</label>
+                    <input type="file" id="product-image" name="product-image" multiple accept="image/*" required>
+                </div>
 
-        <!-- 상품 등록 버튼 -->
-        <div class="form-group">
-            <button type="submit">상품 등록</button>
-        </div>
-        </div>
-        </form>
-    </section>
+                <div id="preview">
+                    <!-- 상품 등록 버튼 -->
+                    <div class="form-group">
+                        <button type="submit">상품 등록</button>
+                    </div>
+                </div>
+                
+            </form>
+        </section>
+    </div>
+
+    <script src="../js/register/preview.js"></script>
 </body>
 </html>

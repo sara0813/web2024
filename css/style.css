@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #a5aaae;
+    background-color: #224d89; /* 파란색 계열 배경 */
     padding: 35px;
     position: relative;
     text-align: center;
@@ -19,95 +19,100 @@ header h1 {
 }
 
 header h1 a {
-    color: #ffffff; /* 기본 텍스트 색상 */
+    color: #ffffff; /* 흰색 텍스트 */
     text-decoration: none;
     font-size: 26px;
     font-weight: bold;
-    transition: color 0.3s ease, box-shadow 0.3s ease; /* 색상과 그림자 전환 효과 */
+    transition: color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* 수정된 hover 효과 */
 header h1 a:hover {
-    background-color: #8d9194; /* 진한 회색으로 호버 시 강조 */
+    background-color: #1a3a6d; /* 파란색 계열로 호버 시 강조 */
     color: #fff; /* 글자색 흰색 유지 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
 }
 
 header h1 a:active {
-    background-color: #6d7073; /* 클릭 시 더 진한 회색 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* 클릭 시 그림자 축소 */
+    background-color: #1a3a6d; /* 클릭 시 더 진한 파란색 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* 버튼을 묶은 컨테이너 스타일 */
 .header-buttons {
     position: absolute;
-    top: 10px; /* 위쪽 여백 */
-    right: 20px; /* 오른쪽 여백 */
+    top: 10px;
+    right: 20px;
     display: flex;
     gap: 10px;
 }
 
-/* 버튼 스타일 - 헤더와 동일한 회색 배경 */
+.container {
+    max-width: 700px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border: 3px solid #224d89;
+}
+
+/* 버튼 스타일 */
 #register-btn, #login-btn {
     padding: 6px 12px;
-    background-color: #a5aaae; /* 헤더와 동일한 회색 배경 */
-    color: #fff; /* 글자색 흰색 */
-    border: 1px solid #a5aaae; /* 테두리도 동일한 색으로 */
+    background-color: #4a6e9b; /* 파란색 계열 배경 */
+    color: #fff; /* 흰색 텍스트 */
+    border: 1px solid #4a6e9b; /* 테두리도 파란색 */
     border-radius: 4px;
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
-/* 버튼 호버 효과 - 진한 회색 배경으로 강조 */
+/* 버튼 호버 효과 */
 #register-btn:hover, #login-btn:hover {
-    background-color: #8d9194; /* 진한 회색으로 호버 시 강조 */
+    background-color: #224d89; /* 헤더 색상과 동일한 파란색 배경 */
     color: #fff; /* 글자색 흰색 유지 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 추가 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* 버튼 클릭 효과 */
 #register-btn:active, #login-btn:active {
-    background-color: #6d7073; /* 클릭 시 더 진한 회색 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 클릭 시 그림자 축소 */
+    background-color: #1a3a6d; /* 클릭 시 더 진한 파란색 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* 탭 스타일 */
 nav.tabs {
-    display: flex; /* 플렉스 박스 레이아웃 */
-    justify-content: space-between; /* 탭 사이 간격 균일 배분 */
+    display: flex;
+    justify-content: space-between;
     background-color: #e9ecef; /* 연한 회색 탭 배경 */
-    padding: 5px; /* 탭 패딩 */
-    border-radius: 5px; /* 둥근 모서리 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 탭 그림자 효과 */
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 nav.tabs input[type="radio"] {
-    display: none; /* 라디오 버튼 숨기기 */
+    display: none;
 }
 
 nav.tabs label {
-    flex: 1; /* 라벨을 동일한 너비로 확장 */
-    padding: 10px; /* 라벨 패딩 */
-    border: none; /* 테두리 없음 */
-    background-color: transparent; /* 배경색 투명 */
-    text-align: center; /* 텍스트 가운데 정렬 */
-    cursor: pointer; /* 포인터 커서 */
-    transition: background-color 0.3s, transform 0.2s; /* 배경 색상 변화 및 크기 변화 애니메이션 */
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 nav.tabs label:hover {
-    background-color: #a5aaae; /* 마우스 오버 시 회색 배경 */
-    color: white; /* 마우스 오버 시 텍스트 색상 흰색 */
-    transform: scale(1.05); /* 마우스 오버 시 크기 증가 */
+    background-color: #4a6e9b; /* 파란색 배경으로 호버 */
+    color: white; /* 흰색 텍스트 */
+    transform: scale(1.05);
 }
 
 nav.tabs input[type="radio"]:checked + label {
-    color: white; /* 선택된 탭 텍스트 색상 흰색 */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3); /* 선택된 탭의 내부 그림자 효과 */
+    color: white;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-section#tab-content {
-    padding: 20px; /* 섹션 패딩 */
-    background-color: white; /* 섹션 배경 흰색 */
-    border-radius: 5px; /* 둥근 모서리 */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 섹션 그림자 효과 */
-}

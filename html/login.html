@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>로그인</title>
     <link rel="stylesheet" href="../css/style.css">
-    <script src="js/tabs.js"></script>
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/tabs.js"></script>
 </head>
 <body>
     <header>
@@ -15,20 +16,34 @@
     </header>
 
     <nav class="tabs">
-        <input type="radio" id="tab-register" name="tab" onclick="f1();">
-        <label for="tab-register">등록</label>
+        <input type="radio" id="tab-register" name="tab" onclick="f1()">
+        <label for="tab-register">상품 등록</label>
     
-        <input type="radio" id="tab-search" name="tab" onclick="f2();">
-        <label for="tab-search">검색</label>
+        <input type="radio" id="tab-search" name="tab" onclick="f2()">
+        <label for="tab-search">상품 검색</label>
     
-        <input type="radio" id="tab-messages" name="tab" onclick="f3();">
-        <label for="tab-messages">메시지</label>
+        <input type="radio" id="tab-messages" name="tab"onclick="f3()">
+        <label for="tab-messages">채팅</label>
     
-        <input type="radio" id="tab-profile" name="tab" onclick="f4();">
+        <input type="radio" id="tab-profile" name="tab" onclick="f4()">
         <label for="tab-profile">마이페이지</label>
-    </nav> 
+    </nav>
 
-    <h1>로그인 페이지</h1>
-    
+    <div class="container">
+        <h2>로그인</h2>
+        <form action="login_action.php" method="POST">
+            <div class="form-group">
+                <label for="email">학교 이메일:</label>
+                <input type="email" id="email" name="email" required placeholder="이메일을 입력하세요" pattern="^[a-zA-Z0-9._%+-]+@seoultech\.ac\.kr$">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password" required placeholder="비밀번호를 입력하세요">
+            </div>
+            
+            <button type="submit">로그인</button>
+        </form>
+    </div>    
 </body>
 </html>

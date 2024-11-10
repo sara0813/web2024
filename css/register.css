@@ -1,0 +1,155 @@
+/* 상품 등록 제목 */
+#product-register-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #224d89;
+    color: #333;
+}
+
+/* 폼 그룹 */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 레이블 */
+form .form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+/* 입력 필드 */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 80%; /* 입력 필드 크기 설정 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+    margin-bottom: 3px;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #224d89; /* 파란색 계열 */
+    outline: none;
+    background-color: #fff;
+}
+
+/* 제출 버튼 */
+button[type="submit"] {
+    background-color: #224d89;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    transition: background-color 0.3s, box-shadow 0.2s;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #1a3d6d; /* 다크 블루 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 에러 및 성공 메시지 */
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.success {
+    color: green;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* 상품 설명 영역 */
+#product-description {
+    width: 80%;
+    height: 150px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    resize: vertical;
+    background-color: #f9f9f9;
+}
+
+#product-description:focus {
+    border-color: #224d89; /* 파란색 계열 */
+    background-color: #fff;
+}
+
+/* 카테고리 버튼들 */
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.category-buttons button {
+    font-size: 12px;
+    padding: 8px 15px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    font-weight: 500;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.category-buttons button:hover {
+    background-color: #224d89;
+    color: white;
+    border-color: #224d89;
+}
+
+/* 선택된 카테고리 버튼 */
+.category-buttons .selected {
+    background-color: #224d89;
+    color: white;
+    border-color: #224d89;
+    font-weight: bold;
+}
+
+/* 작은 화면에서 디자인 조정 */
+@media (max-width: 768px) {
+    #product-register-title {
+        font-size: 24px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+        padding: 12px;
+    }
+}

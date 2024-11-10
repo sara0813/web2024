@@ -1,5 +1,8 @@
+// src/server.js
 const express = require('express');
+const mongoose = require('mongoose');
 const path = require('path');
+
 const app = express();
 const port = 3000;
 

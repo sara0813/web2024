@@ -1,4 +1,4 @@
-//학번
+// 학번 입력 중 숫자 외의 문자 제거
 function validateStudentId() {
     const studentIdInput = document.getElementById('student-id');
     const studentIdError = document.getElementById('student-id-error');
@@ -11,9 +11,7 @@ function validateStudentId() {
     }
 }
 
-
-
-// 학번 입력 완료 후(포커스를 벗어났을 때) 오류 메시지 표시
+// 학번 입력 완료 후(포커스를 벗어났을 때) 8자리 확인 및 메시지 처리
 function checkStudentIdCompletion() {
     const studentIdInput = document.getElementById('student-id');
     const studentIdError = document.getElementById('student-id-error');
@@ -26,14 +24,24 @@ function checkStudentIdCompletion() {
     // 8자리 입력 시 즉시 오류 메시지 제거
     if (studentIdInput.value.length === 8) {
         studentIdError.textContent = ""; // 오류 메시지 초기화
-    }
-    
-    if (studentIdInput.value.length !== 8) {
-        studentIdError.textContent = "학번은 8자리로 입력해 주세요."; // 오류 메시지
     } else {
-        studentIdError.textContent = ""; // 오류 메시지 초기화
+        studentIdError.textContent = "학번은 8자리로 입력해 주세요."; // 오류 메시지
     }
 }
 
-document.getElementById('student-id').addEventListener('input', validateStudentId);
+// 학번 입력 중 8자리가 되면 즉시 오류 메시지 제거
+function handleStudentIdInput() {
+    const studentIdInput = document.getElementById('student-id');
+    const studentIdError = document.getElementById('student-id-error');
+    
+    // 학번이 8자리일 때 오류 메시지 지우기
+    if (studentIdInput.value.length === 8) {
+        studentIdError.textContent = ""; // 오류 메시지 초기화
+    } else if (studentIdInput.value.length !== 8) {
+        studentIdError.textContent = "학번은 8자리로 입력해 주세요."; // 오류 메시지
+    }
+}
+
 document.getElementById('student-id').addEventListener('blur', checkStudentIdCompletion);
+document.getElementById('student-id').addEventListener('input', handleStudentIdInput);
+document.getElementById('student-id').addEventListener('input', validateStudentId);
