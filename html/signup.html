@@ -36,7 +36,7 @@
     <div class="container">
         <h1>회원가입</h1>
         <form id="signup-form">
-            
+    
             <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <div class="nickname-group">
@@ -45,33 +45,43 @@
                 </div>
                 <div id="nickname-error" class="error"></div>
             </div>
-            
-
+    
             <div class="form-group">
                 <label for="student-id">학번</label>
                 <input type="text" id="student-id" maxlength="8" placeholder="학번을 입력해주세요." oninput="validateStudentId()" />
                 <div id="student-id-error" class="error"></div>
             </div>
-
+    
             <div class="form-group">
                 <label for="email">이메일</label>
-                <input type="email" id="email" placeholder="학교 이메일 계정을 입력해주세요." required />
+                <div class="email-group">
+                    <input type="email" id="email" placeholder="학교 이메일 계정을 입력해주세요." required />
+                    <button type="button" id="send-verification-btn" onclick="sendVerificationCode()">인증번호 발송</button>
+                </div>
                 <div id="email-error" class="error"></div>
             </div>
-            
-
+    
+            <div class="form-group">
+                <label for="verification-code">인증번호</label>
+                <div class="verification-group">
+                    <input type="text" id="verification-code" placeholder="인증번호를 입력해주세요." required />
+                    <button type="button" id="check-verification-btn" onclick="checkVerificationCode()">인증번호 확인</button>
+                </div>
+                <div id="verification-code-error" class="error"></div>
+            </div>
+    
             <div class="form-group">
                 <label for="password">비밀번호</label>
                 <input type="password" id="password" placeholder="비밀번호를 입력해주세요." required>
-                <div id="password-error" class="error">
-            </div> 
-
+                <div id="password-error" class="error"></div>
+            </div>
+    
             <div class="form-group">
                 <label for="confirm-password">비밀번호 확인</label>
                 <input type="password" id="confirm-password" placeholder="비밀번호를 재입력해주세요." required>
                 <div id="confirm-password-error" class="error"></div>
             </div>
-
+    
             <div class="checkbox-group">
                 <label>
                     <br><input type="checkbox" id="privacy-policy" required> 개인정보 처리방침에 동의합니다.
@@ -80,7 +90,7 @@
                     <input type="checkbox" id="terms-of-service" required> 이용약관에 동의합니다.
                 </label>
             </div>
-
+    
             <button type="button" id="signup-btn" onclick="register()">회원가입</button>
         </form>
     </div>
@@ -90,6 +100,9 @@
     <script src="../js/signup/signupId.js"></script>
     <script src="../js/signup/signupPw.js"></script>
     <script src ="../js/signup/signupEmail.js"></script>
+    <script src="../js/signup/sendVerificationCode.js"></script>
     <script src ="../js/signup/singupConPw.js"></script>
+    <script src="../config/sendEmail.js"></script>
+    <script src="../config/verifyCode.js"></script>
 </body>
 </html>
