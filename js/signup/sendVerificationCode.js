@@ -23,3 +23,4 @@ function sendVerificationCode() {
         alert("서버와의 연결에 실패하였습니다. 다시 시도해 주세요.");  // 네트워크 오류시 경고창
     });
 }
+

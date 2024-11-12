@@ -1,4 +1,3 @@
-
 const express = require('express');
 const path = require('path');
 const nodemailer = require("nodemailer");
@@ -38,10 +37,16 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// 인증 코드 저장을 위한 변수
+let sentVerificationCode = null; // 인증 코드가 저장될 변수
+
 // POST 요청을 처리할 `/send-code` 엔드포인트 설정
 app.post('/send-code', (req, res) => {
   const { email } = req.body;
   const verificationCode = generateVerificationCode(); // 인증 코드 생성
+
+  // 인증 코드를 저장
+  sentVerificationCode = verificationCode;
 
   const mailOptions = {
     from: process.env.NODEMAILER_USER,
@@ -77,8 +82,22 @@ app.post('/send-code', (req, res) => {
     });
 });
 
+// POST 요청을 처리할 `/verify-code` 엔드포인트 설정
+app.post('/verify-code', (req, res) => {
+  const { code } = req.body; // 요청으로 받은 인증 코드
+
+  console.log(`Received code: ${code}`); // 수신된 코드 출력
+  console.log(`Sent verification code: ${sentVerificationCode}`); // 서버에 저장된 코드 출력
+
+  if (code === sentVerificationCode) {
+      return res.json({ success: true, message: "인증 코드가 일치합니다." });
+  } else {
+      return res.json({ success: false, message: "인증 코드가 일치하지 않습니다." });
+  }
+});
+
+
 // 서버 시작
 app.listen(port, () => {
     console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
 });
- 
