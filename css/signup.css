@@ -126,8 +126,6 @@ input[type="password"]:focus {
     width: calc(100% - 140px); /* 버튼 공간을 제외한 필드 너비 조정 */
 }
 
-
-
 /* 버튼 크기 조정 */
 .nickname-group button,
 .email-group button,
@@ -139,7 +137,6 @@ input[type="password"]:focus {
     width: 120px; /* 버튼 너비 고정 */
     text-align: center;
 }
-
 
 /* 오류 메시지 스타일 */
 .error {

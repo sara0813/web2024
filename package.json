@@ -23,10 +23,11 @@
   },
   "homepage": "https://github.com/sara0813/web2024#readme",
   "dependencies": {
+    "body-parser": "^1.20.3",
     "config": "^3.3.12",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "mongoose": "^8.8.0",
+    "mongoose": "^8.8.1",
     "nodemailer": "^6.9.16"
   }
 }

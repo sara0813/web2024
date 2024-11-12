@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const nodemailer = require("nodemailer");
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
@@ -95,6 +97,26 @@ app.post('/verify-code', (req, res) => {
       return res.json({ success: false, message: "인증 코드가 일치하지 않습니다." });
   }
 });
+
+
+let users = [
+  { nickname: 'testuser' },
+  { nickname: 'sara' },
+];
+
+app.post('/check-nickname', (req, res) => {
+  const { nickname } = req.body;
+
+  // 데이터베이스에서 중복 확인
+  const existingUser = users.find(user => user.nickname === nickname);
+
+  if (existingUser) {
+      res.json({ exists: true });  // 이미 존재하는 닉네임
+  } else {
+      res.json({ exists: false });  // 사용 가능한 닉네임
+  }
+});
+
 
 
 // 서버 시작
