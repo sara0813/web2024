@@ -1,20 +1,38 @@
-// src/server.js
+
 const express = require('express');
 const path = require('path');
+<<<<<<< HEAD
 const nodemailer = require("nodemailer");
 const dotenv = require('dotenv');
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
+=======
+const sendEmail = require("../config/sendEmail");
+const dotenv = require('dotenv');
+dotenv.config();
+>>>>>>> 239f43a3d7c58df2d56bc5785677f0591018c748
 
 const app = express();
 const port = 3000;
 
+<<<<<<< HEAD
 app.use(express.json());
 
 // .env 값 확인 (콘솔에 출력)
 console.log("NODEMAILER_USER: ", process.env.NODEMAILER_USER);
 console.log("NODEMAILER_PASS: ", process.env.NODEMAILER_PASS);
 
+=======
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+// 이메일 사용자와 비밀번호가 제대로 로드되었는지 확인
+console.log("이메일 사용자:", process.env.NODEMAILER_USER);
+console.log("이메일 비밀번호:", process.env.NODEMAILER_PASS);
+
+// JSON 요청 본문을 파싱하기 위한 미들웨어
+app.use(express.json());
+
+>>>>>>> 239f43a3d7c58df2d56bc5785677f0591018c748
 // 정적 파일 제공 (css, js 폴더에 접근)
 app.use(express.static(path.join(__dirname, '..'))); // 루트 디렉토리로 이동하여 모든 파일 제공
 
@@ -81,3 +99,4 @@ app.post('/send-code', (req, res) => {
 app.listen(port, () => {
     console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
 });
+ 
