@@ -32,11 +32,7 @@ select:focus {
     background-color: #fff;
 }
 
-<<<<<<< HEAD
 #check-nickname-btn,
-=======
-#check-nickname-btn, 
->>>>>>> 239f43a3d7c58df2d56bc5785677f0591018c748
 #check-verification-btn,
 #send-verification-btn{
     background-color: #224d89;
@@ -51,13 +47,8 @@ select:focus {
     margin-left: 10px;  /* 왼쪽 여백을 더 줄여서 오른쪽으로 배치 */
 }
 
-<<<<<<< HEAD
 #check-nickname-btn:hover,
 #check-verification-btn:hover,
-=======
-#check-verification-btn:hover,
-#check-nickname-btn:hover
->>>>>>> 239f43a3d7c58df2d56bc5785677f0591018c748
 #send-verification-btn:hover {
     background-color: #224d89;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
