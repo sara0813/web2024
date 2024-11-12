@@ -67,14 +67,14 @@ app.post('/send-code', (req, res) => {
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-      res.status(500).json({ success: false, message: 'Failed to send email' });
-    } else {
-      console.log('Email sent:', info.response);
-      res.json({ success: true, verificationCode }); // 인증 코드 반환
-    }
-  });
+        if (error) {
+            console.error('Error sending email:', error);
+            res.status(500).json({ success: false, message: 'Failed to send email' });
+        } else {
+            console.log('Email sent:', info.response);
+            res.json({ success: true, authCode: verificationCode }); // 클라이언트 코드에서 사용하는 'authCode'로 반환
+        }
+    });
 });
 
 // 서버 시작
