@@ -32,7 +32,9 @@ select:focus {
     background-color: #fff;
 }
 
-#check-nickname-btn{
+#check-nickname-btn,
+#check-verification-btn,
+#send-verification-btn{
     background-color: #224d89;
     color: white;
     padding: 10px 15px;
@@ -45,7 +47,9 @@ select:focus {
     margin-left: 3px;
 }
 
-#check-nickname-btn:hover {
+#check-nickname-btn:hover,
+#check-verification-btn:hover,
+#send-verification-btn:hover {
     background-color: #224d89;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

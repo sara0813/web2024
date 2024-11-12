@@ -55,10 +55,21 @@
 
             <div class="form-group">
                 <label for="email">이메일</label>
-                <input type="email" id="email" placeholder="학교 이메일 계정을 입력해주세요." required />
+                <div class="email-group">
+                    <input type="email" id="email" placeholder="학교 이메일 계정을 입력해주세요." required />
+                    <button type="button" id="send-verification-btn" onclick="sendVerificationCode()">인증번호 발송</button>
+                </div>
                 <div id="email-error" class="error"></div>
             </div>
             
+            <div class="form-group">
+                <label for="verification-code">인증번호</label>
+                <div class="verification-group">
+                    <input type="text" id="verification-code" placeholder="인증번호를 입력해주세요." required />
+                    <button type="button" id="check-verification-btn" onclick="checkVerificationCode()">인증번호 확인</button>
+                </div>
+                <div id="verification-code-error" class="error"></div>
+            </div>
 
             <div class="form-group">
                 <label for="password">비밀번호</label>
@@ -89,7 +100,12 @@
     <script src="../js/signup/signupName.js"></script>
     <script src="../js/signup/signupId.js"></script>
     <script src="../js/signup/signupPw.js"></script>
+    
+    <!--이메일 관련-->
     <script src ="../js/signup/signupEmail.js"></script>
-    <script src ="../js/signup/singupConPw.js"></script>
+    <script src="../js/signup/sendVerificationCode.js"></script>
+
+    <script src ="../js/signup/signupConPw.js"></script>
+
 </body>
 </html>
