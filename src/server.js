@@ -4,20 +4,25 @@ const nodemailer = require("nodemailer");
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
-dotenv.config({ path: path.join(__dirname, '../.env') });
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = 3000;
 
+dotenv.config({ path: path.join(__dirname, '../.env') });
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.json());
-
-// .env 값 확인 (콘솔에 출력)
-console.log("NODEMAILER_USER: ", process.env.NODEMAILER_USER);
-console.log("NODEMAILER_PASS: ", process.env.NODEMAILER_PASS);
-
-// 정적 파일 제공 (css, js 폴더에 접근)
 app.use(express.static(path.join(__dirname, '..'))); // 루트 디렉토리로 이동하여 모든 파일 제공
+
+console.log(process.env.MONGO_URI);  // URI가 제대로 출력되는지 확인
+
+//몽고bd 연결 코드
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.log(err));
 
 // 기본 라우트 설정
 app.get('/', (req, res) => {
