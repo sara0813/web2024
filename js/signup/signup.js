@@ -1,37 +1,3 @@
-let isNicknameChecked = false; // 중복 체크가 이루어졌는지 확인하는 변수
-let isNicknameValid = false;   // 닉네임이 유효한지 확인하는 변수
-
-// 중복 체크 함수
-function checkNickname() {
-    const nicknameInput = document.getElementById('nickname');
-    const nicknameError = document.getElementById('nickname-error');
-    
-    const nickname = nicknameInput.value;
-
-    console.log("닉네임 체크 중:", nickname); // 디버깅용 로그 추가
-
-    // 닉네임이 비어 있지 않으면 중복 체크 시작
-    if (nickname) {
-        // 예시: 특정 닉네임이 이미 사용 중인 닉네임이라 가정
-        if (nickname === "사용불가닉네임") {
-            nicknameError.textContent = "이미 사용 중인 닉네임입니다.";
-            nicknameError.className = 'error'; // 에러 스타일
-            isNicknameValid = false; // 닉네임이 유효하지 않음
-        } else {
-            nicknameError.textContent = "사용 가능한 닉네임입니다.";
-            nicknameError.className = 'success'; // 성공 스타일
-            isNicknameValid = true; // 닉네임이 유효함
-        }
-        isNicknameChecked = true; // 중복 체크가 완료되었음
-    } else {
-        nicknameError.textContent = "닉네임을 입력하세요.";
-        nicknameError.className = 'error'; // 에러 스타일
-        isNicknameValid = false; // 닉네임이 유효하지 않음
-    }
-
-    console.log("중복체크 상태:", isNicknameChecked, "닉네임 유효:", isNicknameValid); // 상태 로그 확인
-}
-
 // 회원가입 함수
 function register() {
     const nickname = document.getElementById("nickname").value;

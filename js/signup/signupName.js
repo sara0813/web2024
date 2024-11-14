@@ -1,24 +1,22 @@
-let isNicknameChecked = false;
-let isNicknameValid = false;
-
 function checkNickname() {
+    let isNicknameChecked = false;
+    let isNicknameValid = false;
+
     const nicknameInput = document.getElementById('nickname');
     const nicknameError = document.getElementById('nickname-error');
-    const nickname = nicknameInput.value;
+    const nickname = nicknameInput.value.trim(); // 입력값 앞뒤 공백 제거
 
     // 닉네임 입력이 비어있는지 확인
     if (!nickname) {
-        nicknameError.textContent = "닉네임을 입력하세요.";
-        nicknameError.className = 'error'; // 에러 스타일 클래스 추가
+        displayError("닉네임을 입력하세요.");
         isNicknameValid = false;
         isNicknameChecked = true;
-        return; // 닉네임이 없으면 더 이상 진행하지 않음
+        return;
     }
 
     // 닉네임 유효성 검사 (예: 길이 체크, 특수문자 등)
     if (nickname.length < 3 || nickname.length > 15) {
-        nicknameError.textContent = "닉네임은 3자 이상 15자 이내여야 합니다.";
-        nicknameError.className = 'error';
+        displayError("닉네임은 3자 이상 15자 이내여야 합니다.");
         isNicknameValid = false;
         isNicknameChecked = true;
         return;
@@ -32,29 +30,38 @@ function checkNickname() {
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (response.isDuplicate) {
-                nicknameError.textContent = "이미 사용 중인 닉네임입니다.";
-                nicknameError.className = 'error'; // 에러 스타일 클래스 추가
+                displayError("이미 사용 중인 닉네임입니다.");
                 isNicknameValid = false;
             } else {
-                nicknameError.textContent = "사용 가능한 닉네임입니다.";
-                nicknameError.className = 'success'; // 성공 스타일 클래스 추가
+                displaySuccess("사용 가능한 닉네임입니다.");
                 isNicknameValid = true;
             }
         } else {
-            nicknameError.textContent = "서버 오류가 발생했습니다. 나중에 다시 시도해주세요.";
-            nicknameError.className = 'error'; // 에러 스타일 클래스 추가
+            displayError("서버 오류가 발생했습니다. 나중에 다시 시도해주세요.");
             isNicknameValid = false;
         }
-        isNicknameChecked = true; // 중복 체크 완료
+        isNicknameChecked = true;
     };
     xhr.onerror = function() {
-        nicknameError.textContent = "서버와의 연결이 실패했습니다.";
-        nicknameError.className = 'error'; // 에러 스타일 클래스 추가
+        displayError("서버와의 연결이 실패했습니다.");
         isNicknameValid = false;
         isNicknameChecked = true;
     };
 
-    // 요청 데이터
     const data = JSON.stringify({ nickname: nickname });
     xhr.send(data);
+}
+
+// 에러 메시지 표시 함수
+function displayError(message) {
+    const nicknameError = document.getElementById('nickname-error');
+    nicknameError.textContent = message;
+    nicknameError.className = 'error';
+}
+
+// 성공 메시지 표시 함수
+function displaySuccess(message) {
+    const nicknameError = document.getElementById('nickname-error');
+    nicknameError.textContent = message;
+    nicknameError.className = 'success';
 }

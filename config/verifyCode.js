@@ -1,4 +1,3 @@
-// verifyCode.js
 let verificationCodeStore = {};
 
 function storeVerificationCode(email, code) {
@@ -23,7 +22,5 @@ function verifyCode(email, inputCode) {
     return stored.code === inputCode;
 }
 
-module.exports = {
-    storeVerificationCode,
-    verifyCode
-};
+// 브라우저에서 모듈로 사용하기 위해 export 사용
+export { storeVerificationCode, verifyCode };
