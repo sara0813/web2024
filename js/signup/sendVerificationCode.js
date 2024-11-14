@@ -1,6 +1,19 @@
+//sendVerificationCode.js
+
+function validateEmailDomain(email) {
+    const emailDomain = email.split('@')[1]; // '@' 뒤의 도메인 부분을 추출
+    return emailDomain === 'seoultech.ac.kr'; // 도메인이 일치하는지 확인
+}
+
 function sendVerificationCode() {
     const email = document.getElementById("email").value;
-    
+
+    // 이메일 도메인 검증
+    if (!validateEmailDomain(email)) {
+        alert('유효한 이메일 도메인을 입력해주세요. (예: @seoultech.ac.kr)');
+        return; // 유효하지 않으면 더 이상 진행하지 않음
+    }
+
     fetch('/send-code', {
         method: 'POST',
         headers: {
@@ -23,4 +36,3 @@ function sendVerificationCode() {
         alert("서버와의 연결에 실패하였습니다. 다시 시도해 주세요.");  // 네트워크 오류시 경고창
     });
 }
-
