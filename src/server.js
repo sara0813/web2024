@@ -104,22 +104,24 @@ app.post('/verify-code', (req, res) => {
   }
 });
 
-let users = [
-  { nickname: 'testuser' },
-  { nickname: 'sara' },
-];
+const User = mongoose.model('User', new mongoose.Schema({ nickname: String }));
 
 app.post('/check-nickname', (req, res) => {
   const { nickname } = req.body;
 
-  // 데이터베이스에서 중복 확인
-  const existingUser = users.find(user => user.nickname === nickname);
-
-  if (existingUser) {
-      res.json({ exists: true });  // 이미 존재하는 닉네임
-  } else {
-      res.json({ exists: false });  // 사용 가능한 닉네임
-  }
+  // MongoDB에서 닉네임 중복 확인
+  User.findOne({ nickname: nickname })
+    .then(existingUser => {
+      if (existingUser) {
+        res.json({ exists: true });  // 이미 존재하는 닉네임
+      } else {
+        res.json({ exists: false });  // 사용 가능한 닉네임
+      }
+    })
+    .catch(error => {
+      console.error('Error checking nickname:', error);
+      res.status(500).json({ success: false, message: '서버 오류' });
+    });
 });
 
 // 서버 시작

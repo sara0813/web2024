@@ -10,7 +10,7 @@ function sendVerificationCode() {
 
     // 이메일 도메인 검증
     if (!validateEmailDomain(email)) {
-        alert('유효한 이메일 도메인을 입력해주세요. (예: @seoultech.ac.kr)');
+        alert('유효한 이메일 도메인을 입력해주세요. (@seoultech.ac.kr)');
         return; // 유효하지 않으면 더 이상 진행하지 않음
     }
 

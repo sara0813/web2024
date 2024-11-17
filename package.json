@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/sara0813/web2024#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "config": "^3.3.12",
     "cookie-parser": "^1.4.7",

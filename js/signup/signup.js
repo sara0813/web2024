@@ -31,9 +31,6 @@ function register() {
     else if (!document.getElementById("verification-code").value) {
         errorMessage = '이메일 인증번호를 입력해주세요.';
     }
-    else if (document.getElementById("verification-code").value && !document.getElementById("verification-code-check-button").clicked) {
-        errorMessage = '인증번호 확인 버튼을 눌러주세요.';
-    }
     else if (document.getElementById("verification-code-error").textContent !== "인증 코드가 일치합니다.") {
         errorMessage = '인증번호를 확인해주세요';
     }
@@ -56,4 +53,5 @@ function register() {
     }
 
     alert('회원가입이 완료되었습니다.');
+    window.location.href = "../../html/login.html";
 }

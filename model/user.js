@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const userSchema = mongoose.Schema({
   nickname: {
     type: String,
-    maxlength: 50,
+    maxlength: 10,
     required: true,
   },
   studentId: {
@@ -35,6 +36,14 @@ const userSchema = mongoose.Schema({
     required: true,
     minlength: 8,
   },
+});
+
+//비밀번호 해싱 전처리
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+      this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
 });
 
 const User = mongoose.model("User", userSchema);
