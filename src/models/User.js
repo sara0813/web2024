@@ -30,11 +30,6 @@ const userSchema = mongoose.Schema({
     minlength: 8,
     match: [/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/, '비밀번호는 8자 이상이어야 하며, 문자, 숫자, 특수문자를 각각 1개 이상 포함해야 합니다.'],
   },
-  confirmPassword: {
-    type: String,
-    required: true,
-    minlength: 8,
-  },
 });
 
 const User = mongoose.model("User", userSchema);

@@ -56,7 +56,7 @@
             <div class="form-group">
                 <label for="email">이메일</label>
                 <div class="email-group">
-                    <input type="email" id="email" placeholder="학교 이메일 계정을 입력해주세요." required />
+                    <input type="email" id="email" placeholder="학교 이메일 계정을 입력해주세요." pattern="^[a-zA-Z0-9._%+-]+@seoultech\.ac\.kr$" required />
                     <button type="button" id="send-verification-btn" onclick="sendVerificationCode()">인증번호 발송</button>
                 </div>
                 <div id="email-error" class="error"></div> <!-- 에러 메시지 -->
