@@ -1,7 +1,9 @@
-function checkNickname() {
-    let isNicknameChecked = false;
-    let isNicknameValid = false;
+// 전역 변수 선언
+let isNicknameChecked = false;   // 닉네임 확인 상태
+let isNicknameValid = false;     // 닉네임 유효성
 
+// 닉네임 확인 함수
+function checkNickname() {
     const nicknameInput = document.getElementById('nickname');
     const nicknameError = document.getElementById('nickname-error');
     const nickname = nicknameInput.value.trim(); // 입력값 앞뒤 공백 제거
@@ -15,8 +17,8 @@ function checkNickname() {
     }
 
     // 닉네임 유효성 검사 (예: 길이 체크, 특수문자 등)
-    if (nickname.length < 3 || nickname.length > 15) {
-        displayError("닉네임은 3자 이상 15자 이내여야 합니다.");
+    if (nickname.length > 10) {
+        displayError("닉네임은 10자 이내여야 합니다.");
         isNicknameValid = false;
         isNicknameChecked = true;
         return;
@@ -29,7 +31,7 @@ function checkNickname() {
     xhr.onload = function() {
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
-            if (response.isDuplicate) {
+            if (response.exists) {  // 서버에서 닉네임 중복 여부 확인
                 displayError("이미 사용 중인 닉네임입니다.");
                 isNicknameValid = false;
             } else {

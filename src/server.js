@@ -49,7 +49,7 @@ const transporter = nodemailer.createTransport({
 // 인증 코드 저장을 위한 변수
 let sentVerificationCode = null; // 인증 코드가 저장될 변수
 
-// POST 요청을 처리할 `/send-code` 엔드포인트 설정
+// POST 요청을 처리할 /send-code 엔드포인트 설정
 app.post('/send-code', (req, res) => {
   const { email } = req.body;
   const verificationCode = generateVerificationCode(); // 인증 코드 생성
@@ -62,7 +62,7 @@ app.post('/send-code', (req, res) => {
     to: email,
     subject: 'ST 마켓 인증 코드',
     html: `
-      <html>
+    <html>
       <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
         <p>안녕하세요, <strong>ST 마켓</strong> 이용자님!</p><br>
 
@@ -76,8 +76,7 @@ app.post('/send-code', (req, res) => {
 
         <p>언제든지 궁금한 사항이 있다면 문의해 주시기 바랍니다. 감사합니다! </p><br><br>-ST 마켓 드림-</p>
       </body>
-      </html>
-    `
+    </html>`
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -91,7 +90,7 @@ app.post('/send-code', (req, res) => {
     });
 });
 
-// POST 요청을 처리할 `/verify-code` 엔드포인트 설정
+// POST 요청을 처리할 /verify-code 엔드포인트 설정
 app.post('/verify-code', (req, res) => {
   const { code } = req.body; // 요청으로 받은 인증 코드
 
@@ -104,7 +103,6 @@ app.post('/verify-code', (req, res) => {
       return res.json({ success: false, message: "인증 코드가 일치하지 않습니다." });
   }
 });
-
 
 let users = [
   { nickname: 'testuser' },
@@ -123,8 +121,6 @@ app.post('/check-nickname', (req, res) => {
       res.json({ exists: false });  // 사용 가능한 닉네임
   }
 });
-
-
 
 // 서버 시작
 app.listen(port, () => {
