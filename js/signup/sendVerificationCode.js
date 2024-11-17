@@ -14,13 +14,11 @@ function sendVerificationCode() {
         return; // 유효하지 않으면 더 이상 진행하지 않음
     }
 
-    fetch('/send-code', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+    fetch('http://localhost:3000/send-code', { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify({ email })
-    })
+      })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
