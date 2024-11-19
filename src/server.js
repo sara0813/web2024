@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 const { User } = require('../model/user');  // userModelFile 경로에 맞게 수정
 
 const app = express();
-const port = 3000;
+const port = 9141;
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
@@ -179,9 +179,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-
-
 // 서버 시작
-app.listen(port, () => {
-    console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
+app.listen(port, '0.0.0.0',() => {
+    console.log(`서버가 http://0.0.0.0:${port} 에서 실행 중입니다.`);
 });
