@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 const { User } = require('../model/user');  // userModelFile 경로에 맞게 수정
 
 const app = express();
-const port = 9141;
+const port = 8080;
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
