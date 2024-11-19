@@ -14,7 +14,7 @@ function sendVerificationCode() {
         return; // 유효하지 않으면 더 이상 진행하지 않음
     }
 
-    fetch('http://localhost:3000/send-code', { 
+    fetch('http://10.10.15.133:9143/send-code', { 
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify({ email })

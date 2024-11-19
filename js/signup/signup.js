@@ -40,7 +40,7 @@ function register() {
     });
     
     // 회원가입 정보를 서버로 보내기
-    fetch('http://localhost:3000/register', {
+    fetch('http://10.10.15.133:9143/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

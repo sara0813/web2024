@@ -8,7 +8,7 @@ function checkVerificationCode() {
         return;
     }
 
-    fetch("http://localhost:3000/verify-code", {
+    fetch("http://10.10.15.133:9143/verify-code", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
