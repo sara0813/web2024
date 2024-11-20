@@ -1,32 +1,43 @@
+.container {
+    max-width: 400px !important;  /* 폼의 최대 너비 */
+    align-items: center !important; /* 화면 중앙 정렬 */
+    padding: 15px 50px 35px !important;
+}
+
+
 h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
     color: #333;
+    
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center; /* 레이블과 입력 필드 수평 중앙 정렬 */
+    gap: 5px; /* 레이블과 입력 필드 사이의 간격 */
 }
 
 .form-group label {
     font-weight: bold;
     color: #333;
-    margin-right: 10px; /* 레이블과 입력 필드 사이의 간격 */
-    width: 100px; /* 레이블의 고정 너비 (조정 가능) */
+    width: 100px; /* 레이블 고정 너비 */
+    flex-shrink: 0; /* 레이블의 너비가 줄어들지 않도록 설정 */
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"] {
-    flex: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
-    padding: 10px;
+    flex-grow: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
+    padding: 12px 15px; /* 여백 조정 */
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
     background-color: #f9f9f9;
+    outline: none; /* 포커스 스타일 제거 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 }
 
 input[type="email"]:focus,
@@ -36,69 +47,21 @@ input[type="password"]:focus {
     background-color: #fff;
 }
 
-button[type="submit"] {
+/* 로그인 버튼 스타일 */
+#login-btn {
+    background: linear-gradient(135deg, #224d89, #1a3b6f); /* 그라디언트 배경 */
+    color: white;
     width: 100%;
-    padding: 10px 15px;
-    background-color: #224d89; /* 기본 버튼 색상 */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.2s;
-    font-size: 14px;
-    margin-top: 20px;
+    height: 40px;
+    padding: 16px; /* 버튼 높이를 늘려서 더 여유롭게 설정 */
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.2s ease;
+    margin-top: 20px; /* 다른 요소들과의 간격 추가 */
 }
 
-button[type="submit"]:hover {
-    background-color: #1a3b6d; /* 호버 시 색상 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-button[type="submit"]:active {
-    background-color: #153f64; /* 클릭 시 색상 */
-}
-
-#check-nickname-btn {
-    background-color: #224d89;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.2s;
-    font-size: 14px;
-    margin-top: 10px;
-    margin-left: 3px;
-}
-
-#check-nickname-btn:hover {
-    background-color: #1a3b6d; /* 호버 시 색상 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.error {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.success {
-    color: green;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.password-requirements {
-    color: #007bff;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.checkbox-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.checkbox-group label {
-    font-weight: normal;
+#login-btn:hover {
+    background: linear-gradient(135deg, #1a3b6f, #224d89);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
