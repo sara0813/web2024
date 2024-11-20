@@ -26,7 +26,7 @@ function checkNickname() {
 
     // 서버에 AJAX 요청을 보내 닉네임 중복 체크
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/check-nickname', true); // 서버의 중복 체크 API 엔드포인트
+    xhr.open('POST', '/api/auth/checkNickname', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function() {
         if (xhr.status === 200) {

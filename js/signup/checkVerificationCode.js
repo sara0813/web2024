@@ -8,16 +8,13 @@ function checkVerificationCode() {
         return;
     }
 
-    const serverUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:8080'
-    : 'http://10.10.15.133:9143';
-
-fetch(`${serverUrl}/verify-code`, {
+    fetch('/api/verification/verify-code', {  // 경로를 '/api/verification/verify-code'로 수정
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
+            email: document.getElementById("email").value,  // 이메일도 함께 보내야 할 경우
             code: enteredCode // 인증 코드 전송
         })
     })

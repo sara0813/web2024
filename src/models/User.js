@@ -20,10 +20,6 @@ const userSchema = mongoose.Schema({
     unique: true,
     required: true,
   },
-  verificationCode: {
-    type: String,
-    required: true,
-  },
   password: {
     type: String,
     required: true,

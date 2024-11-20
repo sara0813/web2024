@@ -8,4 +8,4 @@ const verificationSchema = new mongoose.Schema({
 
 const Verification = mongoose.model('Verification', verificationSchema);
 
-module.exports = Verification;
+module.exports = {Verification};
