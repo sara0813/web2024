@@ -40,7 +40,12 @@ function register() {
     });
     
     // 회원가입 정보를 서버로 보내기
-    fetch('http://10.10.15.133:9143/register', {
+
+    const serverUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8080'
+    : 'http://10.10.15.133:9143';
+
+    fetch(`${serverUrl}/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -14,7 +14,11 @@ function sendVerificationCode() {
         return; // 유효하지 않으면 더 이상 진행하지 않음
     }
 
-    fetch('http://10.10.15.133:9143/send-code', { 
+    const serverUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8080'
+    : 'http://10.10.15.133:9143';
+
+    fetch(`${serverUrl}/send-code`, { 
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify({ email })

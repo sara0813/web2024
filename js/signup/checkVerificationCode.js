@@ -8,7 +8,11 @@ function checkVerificationCode() {
         return;
     }
 
-    fetch("http://10.10.15.133:9143/verify-code", {
+    const serverUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8080'
+    : 'http://10.10.15.133:9143';
+
+fetch(`${serverUrl}/verify-code`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

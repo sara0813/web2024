@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');  // JWT 라이브러리
+
 
 // 기존에 정의된 userSchema 파일에서 User 모델을 가져옴
 const { User } = require('../model/user');  // userModelFile 경로에 맞게 수정
@@ -22,12 +24,13 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(cors({
-  origin: "http://localhost:your_client_port",  // 클라이언트의 주소로 변경
+  origin: "http://localhost:8080", 
   methods: ["GET", "POST"],
   credentials: true
 }));
 
 app.use(express.static(path.join(__dirname, '..'))); // 루트 디렉토리로 이동하여 모든 파일 제공
+
 
 console.log(process.env.MONGO_URI);  // URI가 제대로 출력되는지 확인
 
@@ -114,7 +117,6 @@ app.post('/verify-code', (req, res) => {
   }
 });
 
-
 app.post('/check-nickname', (req, res) => {
   const { nickname } = req.body;
 
@@ -133,53 +135,79 @@ app.post('/check-nickname', (req, res) => {
     });
 });
 
-// 회원가입 처리 라우트
 app.post('/register', async (req, res) => {
   try {
     const { nickname, studentId, email, password, verificationCode } = req.body;
 
-    // 인증 코드 확인
-    if (verificationCode !== sentVerificationCode) {
+    console.log("입력된 비밀번호:", password);  // 비밀번호 출력
+
+    // 인증 코드 확인 (예: DB에서 가져오기)
+    const userVerificationCode = await Verification.findOne({ email });
+    if (!userVerificationCode || verificationCode !== userVerificationCode.code) {
       return res.json({ success: false, message: '인증 코드가 일치하지 않습니다.' });
     }
 
-    // 학번 중복 체크
-    const existingStudent = await User.findOne({ studentId });
+    // 중복 체크 병렬 처리
+    const [existingStudent, existingEmail] = await Promise.all([
+      User.findOne({ studentId }),
+      User.findOne({ email }),
+    ]);
+
     if (existingStudent) {
       return res.json({ success: false, message: '이미 등록된 학번입니다.' });
     }
-
-    // 이메일 중복 체크
-    const existingEmail = await User.findOne({ email });
     if (existingEmail) {
       return res.json({ success: false, message: '이미 등록된 이메일입니다.' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10).catch(err => {
-      console.error("비밀번호 해싱 오류:", err);  // 오류 발생 시 콘솔에 출력
+    // 비밀번호 해싱
+    let hashedPassword;
+    try {
+      hashedPassword = await bcrypt.hash(password, saltRounds);
+    } catch (err) {
+      console.error("비밀번호 해싱 오류:", err);
       return res.status(500).json({ success: false, message: "비밀번호 해싱 중 오류가 발생했습니다." });
-    });
-    // 새 사용자 객체 생성
-    const newUser = new User({
-      nickname,
-      studentId,
-      email,
-      password: hashedPassword,
-      verificationCode
-    });
+    }
 
-    // 데이터베이스에 저장
+    // 새 사용자 저장
+    const newUser = new User({ nickname, studentId, email, password: hashedPassword });
     await newUser.save();
 
     res.status(200).json({ success: true, message: '회원가입이 완료' });
-
   } catch (error) {
-    console.error('회원가입 중 오류 발생:', error);  // 오류 메시지 출력
+    console.error('회원가입 중 오류 발생:', error);
     res.status(500).json({ success: false, message: '회원가입 중 오류가 발생했습니다.' });
   }
 });
 
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  console.log("입력된 비밀번호:", password); 
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({ success: false, message: '이메일이 등록되지 않았습니다.' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: '비밀번호가 올바르지 않습니다.' });
+    }
+
+    // 로그인 성공
+    res.json({ success: true });
+  } catch (error) {
+    console.error('로그인 처리 중 오류:', error);
+    res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
+  }
+});
+
+const saltRounds = 10;
+
 // 서버 시작
-app.listen(port, '0.0.0.0',() => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`서버가 http://0.0.0.0:${port} 에서 실행 중입니다.`);
 });
