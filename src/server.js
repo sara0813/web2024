@@ -2,10 +2,6 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const mongoose = require("mongoose")
-const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser');
-
-const { User } = require('../src/models/User'); 
 
 const authRouter = require('./routes/authRoutes');
 const verificationRouter = require('./routes/verificationRouter');
@@ -40,30 +36,6 @@ mongoose.connect(process.env.MONGO_URI)
 //확인용
 console.log(process.env.MONGO_URI);
 console.log('JWT_SECRET:', process.env.JWT_SECRET);
-
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-      const user = await User.findOne({ email });
-
-      if (!user) {
-          return res.json({ success: false, message: "이메일 또는 비밀번호가 잘못되었습니다." });
-      }
-
-      const match = await bcrypt.compare(password, user.password);
-
-      if (match) {
-          res.json({ success: true, message: "로그인 성공" });
-      } else {
-          res.json({ success: false, message: "이메일 또는 비밀번호가 잘못되었습니다." });
-      }
-  } catch (error) {
-      console.error(error);
-      res.json({ success: false, message: "서버 오류가 발생했습니다." });
-  }
-});
-
 
 // 서버 시작
 app.listen(port, '0.0.0.0', () => {

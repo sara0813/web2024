@@ -6,7 +6,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     console.log(email, password);  // 확인용 로그 추가
 
-    const response = await fetch('/login', {
+    const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
