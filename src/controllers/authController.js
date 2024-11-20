@@ -2,7 +2,6 @@ const { User } = require('../models/User'); // User 모델 가져오기
 const { Verification } = require('../models/verificationModel');
 
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const path = require('path');
 
@@ -66,31 +65,5 @@ exports.register = async (req, res) => {
     } catch (error) {
         console.error('회원가입 중 오류 발생:', error);
         res.status(500).json({ success: false, message: '회원가입 중 오류가 발생했습니다.', error: error.message });
-    }
-};
-
-// 로그인 처리
-exports.login = async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        const user = await User.findOne({ email });
-
-        if (!user) {
-            return res.status(401).json({ success: false, message: '이메일이 등록되지 않았습니다.' });
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(401).json({ success: false, message: '비밀번호가 올바르지 않습니다.' });
-        }
-
-        // JWT 토큰 생성
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        res.json({ success: true, token });
-    } catch (error) {
-        console.error('로그인 중 오류 발생:', error);
-        res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
     }
 };

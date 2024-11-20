@@ -8,7 +8,5 @@ router.post('/checkNickname', authController.checkNickname);
 // 회원가입 라우터
 router.post('/register', authController.register);
 
-//로그인 라우터
-router.post('/login', authController.login);
 
 module.exports = router;

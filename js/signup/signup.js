@@ -40,7 +40,7 @@ function register() {
     });
     
     // 회원가입 정보를 서버로 보내기
-    fetch(`/api/auth/register`, {
+    fetch('/api/auth/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
