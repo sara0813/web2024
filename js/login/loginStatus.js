@@ -23,16 +23,3 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('로그인 상태 확인 실패:', error));
 });
-
-// 로그아웃 버튼 클릭 시
-document.getElementById('logout-btn')?.addEventListener('click', () => {
-    fetch('/api/auth/logout', {
-        method: 'POST'
-    })
-    .then(response => {
-        if (response.ok) {
-            location.reload(); // 로그아웃 후 페이지 새로고침
-        }
-    })
-    .catch(error => console.error('로그아웃 실패:', error));
-});

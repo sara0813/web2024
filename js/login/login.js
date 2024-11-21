@@ -19,7 +19,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     if (result.success) {
         alert("로그인 성공!");
         localStorage.setItem("isLoggedIn", "true"); // 로그인 상태 저장
-        window.location.href = "../index.html"; // 메인 페이지로 이동
+        window.location.href = "/html/main.html"; // 메인 페이지로 이동
     } else {
         alert("로그인 실패: " + result.message);
     }
