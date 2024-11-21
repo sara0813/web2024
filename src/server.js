@@ -4,9 +4,11 @@ const dotenv = require('dotenv');
 const mongoose = require("mongoose")
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
 
 const authRouter = require('./routes/authRoutes');
 const verificationRouter = require('./routes/verificationRouter');
+const productRoutes = require('./routes/productRoutes');
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
@@ -24,6 +26,11 @@ app.use(cors({
   credentials: true,
 }));
 
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(session({
@@ -34,6 +41,7 @@ app.use(session({
 
 app.use('/api/auth', authRouter);
 app.use('/api/verification', verificationRouter);
+app.use('/api', productRoutes);
 
 app.use(express.static(path.join(__dirname, '..'))); // 루트 디렉토리로 이동하여 모든 파일 제공
 

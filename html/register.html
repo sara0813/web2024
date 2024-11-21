@@ -40,8 +40,7 @@
         <section id="tab-content">
             <h2 id="product-register-title">판매할 상품을 등록 해주세요</h2>
             
-            <form action="/submit-product" method="POST" enctype="multipart/form-data">
-            
+            <form id="productForm">
                 <!-- 제목 -->
                 <div class="form-group">
                     <label for="product-name">제목</label>
@@ -75,24 +74,24 @@
                     <input type="number" id="product-price" name="product-price" placeholder="상품 가격을 입력하세요" required min="1">
                 </div>
 
-                <!-- 상품 이미지 -->
+                <!-- 상품 이미지 -->     
                 <div class="form-group">
                     <label for="product-image">사진을 업로드해주세요:</label>
                     <input type="file" id="product-image" name="product-image" multiple accept="image/*" required>
                 </div>
 
-                <div id="preview">
-                    <!-- 상품 등록 버튼 -->
-                    <div class="form-group">
-                        <button type="submit">상품 등록</button>
-                    </div>
-                </div>
-                
+                <div id="preview"></div>
+
+                <!-- 상품 등록 버튼 -->
+                <div class="form-group">
+                    <button type="submit">상품 등록</button>
+                </div>              
             </form>
         </section>
     </div>
 
     <script src="../js/register/preview.js"></script>
     <script src="../js/login/loginStatus.js"></script>
+    <script src="../js/register/productRegister.js"></script>
 </body>
 </html>

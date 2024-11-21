@@ -36,6 +36,14 @@ select {
     transition: all 0.3s ease;
 }
 
+input[type="file"] {
+    margin-top: 10px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
 /* 입력 필드 포커스 시 스타일 */
 input[type="text"]:focus,
 input[type="number"]:focus,
@@ -54,23 +62,29 @@ select:focus {
 
 /* 제출 버튼 */
 button[type="submit"] {
-    background-color: #224d89;
+    background-color: #224d89; /* 기본 색상 */
     color: white;
-    padding: 12px 20px;
+    padding: 12px 20px; /* 패딩을 적당히 줄여서 크기 조정 */
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-size: 15px;
-    width: 100%;
+    width: 150px;
+    margin-left: auto;
+    margin-right: 0;
     transition: background-color 0.3s, box-shadow 0.2s;
-    margin-top: 25px;
+    bottom: 20px; /* 하단에 위치 */
+    right: 20px; /* 오른쪽에 위치 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
 /* 버튼 호버 효과 */
 button[type="submit"]:hover {
-    background-color: #1a3b6f;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #1a3b6f; /* 호버 색상 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 
 /* 카테고리 버튼들 */
 .category-buttons {
@@ -96,6 +110,19 @@ button[type="submit"]:hover {
     background-color: #224d89;
     color: white;
     border-color: #224d89;
+}
+
+/* 미리보기 컨테이너 */
+#preview {
+    position: relative; /* 자식 요소들의 위치를 기준으로 설정 */
+    z-index: 1; /* 버튼이 위에 가려지지 않도록 설정 */
+    margin-top: 20px; /* 이미지와 버튼 사이에 공간을 추가 */
+}
+
+/* 미리보기 이미지 스타일 */
+#preview img {
+    width: 100px; /* 이미지 크기 설정 */
+    margin: 5px; /* 이미지 간격 설정 */
 }
 
 /* 작은 화면에서 디자인 조정 */
