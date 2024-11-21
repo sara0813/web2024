@@ -77,6 +77,8 @@ nav.tabs {
     margin-top: 110px;
     padding: 0;
     border-bottom: 2px solid #224d89;
+    justify-content: center; /* 가운데 정렬 */
+    position: relative; /* 자식 요소 위치 조정 */
 }
 
 nav.tabs input[type="radio"] {
@@ -122,3 +124,15 @@ nav.tabs input[type="radio"]:checked + label::after {
     color: #333;
   }
   
+  #welcome-message {
+    position: absolute; /* 부모 요소 기준 위치 설정 */
+    right: 15px; /* 오른쪽에 조금 더 여유 공간을 추가 */
+    font-size: 14px; /* 글자 크기 약간 줄임 */
+    line-height: 1.5; /* 텍스트 줄 간격 조정 */
+    padding: 0; /* 여백 없애기 */
+    margin: 0; /* 불필요한 여백 제거 */
+    color: #333; /* 텍스트 색상, 더 깔끔한 색상 */
+    font-weight: 500; /* 글자 굵기 설정 */
+    font-family: Arial, sans-serif; /* 글꼴 설정 */
+    text-align: right; /* 텍스트 오른쪽 정렬 */
+}
