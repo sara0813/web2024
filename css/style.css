@@ -112,3 +112,13 @@ nav.tabs input[type="radio"]:checked + label::after {
     border-radius: 2px;
     transition: width 0.3s;
 }
+
+#user-greeting {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  

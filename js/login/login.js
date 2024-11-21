@@ -18,7 +18,8 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     if (result.success) {
         alert("로그인 성공!");
-        window.location.href = "../index.html"; // 예시로 /home 페이지로 이동
+        localStorage.setItem("isLoggedIn", "true"); // 로그인 상태 저장
+        window.location.href = "../index.html"; // 메인 페이지로 이동
     } else {
         alert("로그인 실패: " + result.message);
     }

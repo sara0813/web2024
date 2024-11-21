@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const mongoose = require("mongoose")
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const authRouter = require('./routes/authRoutes');
 const verificationRouter = require('./routes/verificationRouter');
@@ -23,6 +25,13 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(session({
+  secret: 'Hello!',
+  resave: false,
+  saveUninitialized: true,
+}));
+
 app.use('/api/auth', authRouter);
 app.use('/api/verification', verificationRouter);
 

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ST 마켓</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
@@ -13,27 +13,23 @@
     <header>
         <h1>
             <a href="index.html">
-              <img src="logo.png" width="110" alt="Logo">
+              <img src="../logo.png" width="110" alt="Logo">
             </a>
         </h1>
 
-        <div class="header-buttons" id="header-buttons">
-            <button id="register-btn" onclick="location.href='html/signup.html'">회원가입</button>
-            <button id="login-btn" onclick="location.href='html/login.html'">로그인</button>
-        </div>
     </header>
 
     <nav class="tabs">
-        <input type="radio" id="tab-register" name="tab" onclick="f1();">
+        <input type="radio" id="tab-register" name="tab" onclick="f1()">
         <label for="tab-register">상품 등록</label>
     
-        <input type="radio" id="tab-search" name="tab" onclick="f2();">
+        <input type="radio" id="tab-search" name="tab" onclick="f2()">
         <label for="tab-search">상품 검색</label>
     
-        <input type="radio" id="tab-messages" name="tab" onclick="f3();">
+        <input type="radio" id="tab-messages" name="tab"onclick="f3()">
         <label for="tab-messages">채팅</label>
     
-        <input type="radio" id="tab-profile" name="tab" onclick="f4();">
+        <input type="radio" id="tab-profile" name="tab" onclick="f4()">
         <label for="tab-profile">마이페이지</label>
     </nav>  
     
@@ -57,6 +53,6 @@
             </section>
         </section>
     </div>    
-    <script src="js/tabs.js"></script>
+    <script src="../js/tabs.js"></script>
 </body>
 </html>

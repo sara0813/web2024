@@ -67,28 +67,33 @@ exports.register = async (req, res) => {
         res.status(500).json({ success: false, message: '회원가입 중 오류가 발생했습니다.', error: error.message });
     }
 };
+
 // 로그인 처리
 exports.login = async (req, res) => {
     const { email, password } = req.body;
-
+  
     try {
-        const user = await User.findOne({ email });
-
-        if (!user) {
-            return res.json({ success: false, message: "이메일 또는 비밀번호가 잘못되었습니다." });
-        }
-
-        // 비밀번호 비교
-        const match = await bcrypt.compare(password, user.password);
-
-        if (match) {
-            // 로그인 성공 시, JWT 토큰 발급 등의 처리가 필요할 수 있습니다.
-            res.json({ success: true, message: "로그인 성공" });
-        } else {
-            res.json({ success: false, message: "이메일 또는 비밀번호가 잘못되었습니다." });
-        }
+      const user = await User.findOne({ email });
+  
+      if (!user) {
+        return res.json({ success: false, message: "이메일 또는 비밀번호가 잘못되었습니다." });
+      }
+  
+      // 비밀번호 비교
+      const match = await bcrypt.compare(password, user.password);
+  
+      if (match) {
+        // 로그인 성공 시, 사용자 정보 세션에 저장
+        req.session.user = {
+          nickname: user.nickname
+        };
+  
+        res.json({ success: true, message: "로그인 성공" });
+      } else {
+        res.json({ success: false, message: "이메일 또는 비밀번호가 잘못되었습니다." });
+      }
     } catch (error) {
-        console.error(error);
-        res.json({ success: false, message: "서버 오류가 발생했습니다." });
+      console.error(error);
+      res.json({ success: false, message: "서버 오류가 발생했습니다." });
     }
-};
+  };
