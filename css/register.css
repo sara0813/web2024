@@ -8,7 +8,6 @@
     padding-bottom: 10px;
     margin-bottom: 30px;
 }
-
 /* 폼 그룹 */
 .form-group {
     margin-bottom: 20px;
@@ -16,11 +15,10 @@
     flex-direction: column;
 }
 
-/* 레이블 */
-form .form-group label {
+/* 레이블 스타일 */
+.form-group label {
     margin-bottom: 8px;
-    font-weight: bold;
-    font-size: 14px;
+    font-weight: 600;
     color: #333;
 }
 
@@ -29,24 +27,23 @@ input[type="text"],
 input[type="number"],
 textarea,
 select {
-    width: 100%;
-    max-width: 600px;
+    width: calc(100% - 20px); /* 버튼 공간 제외하고 필드 크기 조정 */
     padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #333;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s, background-color 0.3s;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f7f7f7;
+    transition: all 0.3s ease;
 }
 
+/* 입력 필드 포커스 시 스타일 */
 input[type="text"]:focus,
 input[type="number"]:focus,
 textarea:focus,
 select:focus {
     border-color: #224d89;
-    outline: none;
     background-color: #fff;
+    outline: none;
 }
 
 /* 상품 설명 영역 */
@@ -58,7 +55,7 @@ select:focus {
 /* 제출 버튼 */
 button[type="submit"] {
     background-color: #224d89;
-    color: #fff;
+    color: white;
     padding: 12px 20px;
     border: none;
     border-radius: 6px;
@@ -69,23 +66,10 @@ button[type="submit"] {
     margin-top: 25px;
 }
 
+/* 버튼 호버 효과 */
 button[type="submit"]:hover {
-    background-color: #1a3d6d;
+    background-color: #1a3b6f;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* 에러 및 성공 메시지 */
-.error, .success {
-    font-size: 13px;
-    margin-top: 8px;
-}
-
-.error {
-    color: #d9534f;
-}
-
-.success {
-    color: #5cb85c;
 }
 
 /* 카테고리 버튼들 */
