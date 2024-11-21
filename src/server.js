@@ -44,6 +44,7 @@ app.use('/api/verification', verificationRouter);
 app.use('/api', productRoutes);
 
 app.use(express.static(path.join(__dirname, '..'))); // 루트 디렉토리로 이동하여 모든 파일 제공
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //몽고bd 연결 코드
 mongoose.connect(process.env.MONGO_URI)

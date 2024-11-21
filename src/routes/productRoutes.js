@@ -17,6 +17,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // 상품 등록 라우트
-router.post('/register', upload.array('product-image', 5), submitProduct); // 수정된 부분
+router.post('/register', upload.array('image', 5), submitProduct); // 수정된 부분
 
 module.exports = router;

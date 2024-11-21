@@ -1,40 +1,40 @@
 const mongoose = require("mongoose");
 
-const productSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true, // 필수 항목
-  },
-  category: {
-    type: String,
-    required: true, // 필수 항목
-    default: "general", // 기본 카테고리 설정
-  },
-  description: {
-    type: String,
-    required: true, // 필수 항목
-    maxlength: 500, // 설명 최대 길이 제한
-  },
-  price: {
-    type: Number,
-    required: true, // 필수 항목
-  },
-  images: {
-    type: [String],
-    required: true, // 이미지 배열 필수
-    validate: {
-      validator: function (v) {
-        return v && v.length > 0; // 최소 1개 이상의 이미지가 있어야 함
-      },
-      message: "상품 이미지를 최소 1개 이상 업로드해야 합니다.",
+const productSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "상품 이름은 필수입니다."],
+    },
+    category: {
+      type: String,
+      required: true,
+      enum: ["general", "electronics", "fashion", "books"], // 카테고리 제한
+      default: "general",
+    },
+    description: {
+      type: String,
+      required: true,
+      maxlength: [500, "설명은 최대 500자까지 입력할 수 있습니다."],
+      minlength: [10, "설명은 최소 10자 이상이어야 합니다."],
+    },
+    price: {
+      type: Number,
+      required: true,
+      validate: {
+        validator: function (value) {
+          return value % 10 === 0; // 10으로 나누어 떨어지는지 확인
+        },
+        message: props => `${props.value} is not a multiple of 10!` // 유효하지 않을 때 표시할 메시지
+      }
+    },
+    images: {
+      type: [String],
+      required: true,
     },
   },
-  seller: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // 판매자 정보를 User 모델과 연결
-    required: true, // 필수 항목
-  },
-}, { timestamps: true }); // 생성 및 수정 시간 자동 기록
+  { timestamps: true }
+);
 
 const Product = mongoose.model("Product", productSchema);
 
