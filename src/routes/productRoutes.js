@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const { submitProduct } = require('../controllers/productController'); // 수정된 부분
+const { submitProduct, getProducts } = require('../controllers/productController'); // 수정된 부분
 
 // Multer 설정 (이미지 업로드)
 const storage = multer.diskStorage({
@@ -18,5 +18,8 @@ const upload = multer({ storage: storage });
 
 // 상품 등록 라우트
 router.post('/register', upload.array('image', 5), submitProduct); // 수정된 부분
+
+//상품 조회 라우트
+router.get('/products', getProducts);
 
 module.exports = router;

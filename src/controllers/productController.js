@@ -28,3 +28,16 @@ exports.submitProduct = async (req, res) => {
     res.status(500).send("서버 오류가 발생했습니다.");
   }
 };
+
+exports.getProducts = async (req, res) => {
+  try {
+    // Product 데이터 가져오기
+    const products = await Product.find(); // populate 제거
+
+    // 데이터 반환
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error in getProducts:", error);
+    res.status(500).send("서버 오류가 발생했습니다.");
+  }
+};
