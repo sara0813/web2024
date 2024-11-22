@@ -9,8 +9,8 @@ const productSchema = mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["general", "electronics", "fashion", "books"], // 카테고리 제한
-      default: "general",
+      enum: ["전자기기", "생활용품", "화장품", "의류", "도서", "가구", "기타"],
+      default: "기타",
     },
     description: {
       type: String,

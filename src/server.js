@@ -26,10 +26,7 @@ app.use(cors({
   credentials: true,
 }));
 
-const uploadDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-}
+app.use(express.static(path.join(__dirname, '..'))); // 루트 디렉토리로 이동하여 모든 파일 제공
 
 app.use(express.json());
 app.use(cookieParser());
@@ -43,8 +40,16 @@ app.use('/api/auth', authRouter);
 app.use('/api/verification', verificationRouter);
 app.use('/api', productRoutes);
 
-app.use(express.static(path.join(__dirname, '..'))); // 루트 디렉토리로 이동하여 모든 파일 제공
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// 업로드 폴더 설정
+const uploadDir = path.join(__dirname, '../uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
+// 정적 파일 제공
+app.use('/uploads', express.static(uploadDir));
+
+
 
 //몽고bd 연결 코드
 mongoose.connect(process.env.MONGO_URI)
