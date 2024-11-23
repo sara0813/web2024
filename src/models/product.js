@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const { MAX } = require("uuid");
 
 const productSchema = mongoose.Schema(
   {
     name: {
       type: String,
+      maxlength: [20, "상품명은 최대 20자까지 입력할 수 있습니다."],
       required: [true, "상품 이름은 필수입니다."],
     },
     category: {
@@ -21,13 +23,14 @@ const productSchema = mongoose.Schema(
     price: {
       type: Number,
       required: true,
+      max: 9999999999, 
       validate: {
         validator: function (value) {
           return value % 10 === 0; // 10으로 나누어 떨어지는지 확인
         },
         message: props => `${props.value} is not a multiple of 10!` // 유효하지 않을 때 표시할 메시지
       }
-    },
+    },       
     images: {
       type: [String],
       required: true,

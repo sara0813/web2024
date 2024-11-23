@@ -29,10 +29,19 @@ form.addEventListener('submit', async (event) => {
         isValid = false;
         errorMessage += '설명은 최대 500자까지 입력할 수 있습니다.\n';
     }
+    if (name.length > 20) {
+        isValid = false;
+        errorMessage += '상품명은 최대 20자까지 입력할 수 있습니다.\n';
+    }
     if (price % 10 !== 0) {
         isValid = false;
         errorMessage += '가격은 10원 단위로 입력해주세요.\n';
     }
+    if (price > 9999999999) {
+        event.preventDefault();
+        alert('가격은 최대 9999999999원까지만 입력 가능합니다!');
+        return;
+      }
     if (images.length === 0) {
         isValid = false;
         errorMessage += '상품 이미지 최소 1개 이상 업로드해야 합니다.\n';
