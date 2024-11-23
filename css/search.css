@@ -1,12 +1,66 @@
+/* 상품 리스트 컨테이너 스타일 */
 #product-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 반응형 그리드 */
     gap: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* 최대 너비 */
 }
 
+/* 개별 상품 카드 스타일 */
 .product-item {
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 300px;
-    text-align: center;
+    background: #fff; /* 카드 배경 */
+    border: 1px solid #ddd; /* 외곽선 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
+    overflow: hidden; /* 콘텐츠 넘침 방지 */
+    transition: transform 0.3s, box-shadow 0.3s; /* 애니메이션 */
+    text-align: center; /* 가운데 정렬 */
+    padding: 15px;
+}
+
+/* 상품 이미지 스타일 */
+.product-item img {
+    max-width: 100%; /* 이미지 너비 제한 */
+    height: auto; /* 비율 유지 */
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+/* 상품 제목 스타일 */
+.product-item h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #224d89; /* 제목 색상 */
+    font-weight: bold;
+    text-overflow: ellipsis; /* 길면 생략 */
+    white-space: nowrap; /* 한 줄 유지 */
+    overflow: hidden; /* 넘침 숨기기 */
+}
+
+/* 상품 설명 및 카테고리 스타일 */
+/* 상품 설명 텍스트 수정 */
+.product-item p {
+    font-size: 0.9em;
+    color: #555;
+    margin: 5px 0;
+    line-height: 1.4; /* 줄 간격 설정 */
+    white-space: normal; /* 줄 바꿈 허용 */
+    overflow: hidden; /* 넘치는 텍스트 숨기기 */
+    text-overflow: ellipsis; /* 텍스트가 너무 길 경우 '...' 표시 */
+    max-height: 4.2em; /* 최대 3줄로 제한 (line-height * 3) */
+}
+
+
+/* 상품 가격 강조 */
+.product-item p strong {
+    color: #224d89;
+    font-size: 1em;
+}
+
+/* 상품 카드 호버 효과 */
+.product-item:hover {
+    transform: translateY(-5px); /* 위로 약간 이동 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 더 강한 그림자 */
 }
