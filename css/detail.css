@@ -1,0 +1,58 @@
+#productDetail {
+    text-align: center;
+}
+
+/* 상품 이미지 */
+#product-image {
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+/* 상품명 */
+#product-name {
+    font-size: 2rem;
+    color: #004f9e; /* 강한 파란색 */
+    margin-bottom: 10px;
+}
+
+/* 가격 */
+#product-price {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* 카테고리 */
+#product-category {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* 설명 */
+#product-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 600px) {
+    #productDetail {
+        padding: 15px;
+    }
+
+    #product-name {
+        font-size: 1.5rem;
+    }
+
+    #product-price {
+        font-size: 1.2rem;
+    }
+
+    #product-category, #product-description {
+        font-size: 0.9rem;
+    }
+}

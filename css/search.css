@@ -1,66 +1,118 @@
-/* 상품 리스트 컨테이너 스타일 */
-#product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 반응형 그리드 */
-    gap: 20px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 1200px; /* 최대 너비 */
+/* 검색 폼 스타일 */
+#search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9fbfd; /* 부드러운 배경색 */
+    border: 1px solid #d1dce5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* 개별 상품 카드 스타일 */
-.product-item {
-    background: #fff; /* 카드 배경 */
-    border: 1px solid #ddd; /* 외곽선 */
-    border-radius: 8px; /* 모서리 둥글게 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
-    overflow: hidden; /* 콘텐츠 넘침 방지 */
-    transition: transform 0.3s, box-shadow 0.3s; /* 애니메이션 */
-    text-align: center; /* 가운데 정렬 */
+#search-form .form-group {
+    flex: 1;
+    display: flex;
+    gap: 10px; /* 필드 간 간격 */
+    align-items: center;
+}
+
+/* 라벨 스타일 */
+#search-form label {
+    font-size: 1rem;
+    color: #224d89;
+    font-weight: bold;
+}
+
+/* 검색 입력 필드 스타일 */
+#search-query {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #d1dce5;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #333;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#search-query:focus {
+    border-color: #224d89;
+    box-shadow: 0 0 4px rgba(34, 77, 137, 0.3);
+    outline: none;
+}
+
+/* 검색 버튼 스타일 */
+#search-form button {
+    background-color: #224d89;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#search-form button:hover {
+    background-color: #1a3a6d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 검색 결과 섹션 */
+#search-results {
+    margin-top: 20px;
     padding: 15px;
+    background-color: #fff;
+    border: 1px solid #d1dce5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    min-height: 100px;
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
 }
 
-/* 상품 이미지 스타일 */
-.product-item img {
-    max-width: 100%; /* 이미지 너비 제한 */
-    height: auto; /* 비율 유지 */
+/* 검색 결과 리스트 */
+#product-list {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* 개별 상품 카드 */
+#product-list .product-card {
+    background-color: #fff;
+    border: 1px solid #d1dce5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#product-list .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#product-list .product-card img {
+    max-width: 100%;
+    height: auto;
     border-radius: 6px;
     margin-bottom: 10px;
 }
 
-/* 상품 제목 스타일 */
-.product-item h3 {
-    font-size: 1.2em;
-    margin: 10px 0;
-    color: #224d89; /* 제목 색상 */
-    font-weight: bold;
-    text-overflow: ellipsis; /* 길면 생략 */
-    white-space: nowrap; /* 한 줄 유지 */
-    overflow: hidden; /* 넘침 숨기기 */
-}
-
-/* 상품 설명 및 카테고리 스타일 */
-/* 상품 설명 텍스트 수정 */
-.product-item p {
-    font-size: 0.9em;
-    color: #555;
-    margin: 5px 0;
-    line-height: 1.4; /* 줄 간격 설정 */
-    white-space: normal; /* 줄 바꿈 허용 */
-    overflow: hidden; /* 넘치는 텍스트 숨기기 */
-    text-overflow: ellipsis; /* 텍스트가 너무 길 경우 '...' 표시 */
-    max-height: 4.2em; /* 최대 3줄로 제한 (line-height * 3) */
-}
-
-
-/* 상품 가격 강조 */
-.product-item p strong {
+#product-list .product-card h3 {
+    font-size: 1.2rem;
     color: #224d89;
-    font-size: 1em;
+    margin: 10px 0;
 }
 
-/* 상품 카드 호버 효과 */
-.product-item:hover {
-    transform: translateY(-5px); /* 위로 약간 이동 */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 더 강한 그림자 */
+#product-list .product-card p {
+    font-size: 0.9rem;
+    color: #666;
 }

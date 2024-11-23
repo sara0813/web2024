@@ -1,5 +1,10 @@
 const { Product } = require("../models/product");
 
+exports.getProductsById = async (id) => {
+  return await Product.findById(id);
+};
+
+
 exports.submitProduct = async (req, res) => {
   try {
     const {name, category, description, price } = req.body;

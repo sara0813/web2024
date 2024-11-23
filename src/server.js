@@ -49,8 +49,6 @@ if (!fs.existsSync(uploadDir)) {
 // 정적 파일 제공
 app.use('/uploads', express.static(uploadDir));
 
-
-
 //몽고bd 연결 코드
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected..."))
@@ -59,6 +57,11 @@ mongoose.connect(process.env.MONGO_URI)
 //확인용
 console.log(process.env.MONGO_URI);
 console.log('JWT_SECRET:', process.env.JWT_SECRET);
+app.use((req, res, next) => {
+  console.log(`Request: ${req.method} ${req.url}`);
+  next();
+});
+
 
 // 서버 시작
 app.listen(port, '0.0.0.0', () => {
