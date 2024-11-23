@@ -2,7 +2,7 @@ const { Product } = require("../models/product");
 
 exports.submitProduct = async (req, res) => {
   try {
-    const { name, category, description, price } = req.body;
+    const {name, category, description, price } = req.body;
 
     // 이미지 파일 처리: 절대 경로 대신 상대 경로 저장
     const images = req.files.map((file) => `/uploads/${file.filename}`);

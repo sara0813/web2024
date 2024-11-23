@@ -23,4 +23,14 @@ const upload = multer({ storage: storage });
 router.post('/register', upload.array('image', 5), submitProduct);
 router.get('/products', getProducts);
 
+router.get("/products/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ error: "상품을 찾을 수 없습니다." });
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: "상품 정보를 불러오는 중 오류가 발생했습니다." });
+  }
+});
+
 module.exports = router;

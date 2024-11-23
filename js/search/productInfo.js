@@ -24,10 +24,8 @@ async function loadProducts() {
 
           productItem.innerHTML = `
               <h3>${product.name}</h3>
-              <p>카테고리: ${product.category}</p>
-              <p>${product.description}</p>
-              <p>가격: ${product.price}원</p>
               <img src="${imageUrl}" alt="${product.name}" style="max-width: 200px;">
+              <p>가격: ${product.price}원</p>
           `;
           productList.appendChild(productItem);
       });
