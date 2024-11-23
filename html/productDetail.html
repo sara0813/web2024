@@ -22,7 +22,12 @@
             <img id="product-image" src="" alt="상품 이미지" style="max-width: 300px;">
             <p id="product-category"></p>
             <p id="product-description"></p>
-            <p id="product-price"></p>
+            
+            <div id="button-container">
+                <button id="back-btn" onclick="history.back()">뒤로가기</button>
+                <p id="product-price"></p>
+                <button id="chat-btn" onclick="location.href='/html/chat.html'">채팅하기</button>
+            </div>
         </div>
 
     <script src="../js/search/productDetail.js"></script>
