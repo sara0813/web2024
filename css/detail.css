@@ -1,58 +1,59 @@
+/* 상품 상세 정보 전체 컨테이너 */
 #productDetail {
-    text-align: center;
+    max-width: 800px;
+    margin: 150px auto 10px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 2px solid #224d89;
+    text-align: center; /* 내용 중앙 정렬 */
+}
+#product-name {
+    font-size: 2rem; /* 큰 글자 크기 */
+    color: #2c3e50; /* 다크 그레이 색상 */
+    margin-bottom: 25px; /* 하단 여백 */
+    font-weight: 700; /* 강조 */
+    border-bottom: 2px solid #ddd; /* 구분선을 추가 */
+    padding-bottom: 10px; /* 구분선과 간격 */
 }
 
 /* 상품 이미지 */
 #product-image {
-    border-radius: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
+    width: 100%; /* 부모 요소에 맞춤 */
+    max-width: 500px; /* 최대 크기 제한 */
+    height: auto; /* 비율 유지 */
+    border-radius: 12px; /* 부드러운 모서리 */
+    margin-bottom: 25px; /* 하단 여백 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    display: block; /* 이미지 중앙 정렬을 위해 블록 요소 */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* 상품명 */
-#product-name {
-    font-size: 2rem;
-    color: #004f9e; /* 강한 파란색 */
-    margin-bottom: 10px;
-}
-
-/* 가격 */
-#product-price {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-/* 카테고리 */
+/* 상품 카테고리 스타일 */
 #product-category {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 15px;
+    font-size: 1.1rem; /* 적당한 크기 */
+    color: #3498db; /* 눈에 띄는 파란색 */
+    margin-bottom: 15px; /* 하단 여백 */
+    font-weight: 600; /* 약간 강조 */
+    text-transform: uppercase; /* 카테고리를 대문자로 표시 */
 }
 
-/* 설명 */
+/* 상품 설명 스타일 */
 #product-description {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 20px;
+    font-size: 1.1rem; /* 기본 크기 */
+    color: #34495e; /* 어두운 회색 */
+    margin-bottom: 20px; /* 하단 여백 */
+    line-height: 1.8; /* 줄 간격 */
+    text-align: left; /* 양쪽 정렬로 정돈된 느낌 */
 }
 
-/* 반응형 스타일 */
-@media (max-width: 600px) {
-    #productDetail {
-        padding: 15px;
-    }
-
-    #product-name {
-        font-size: 1.5rem;
-    }
-
-    #product-price {
-        font-size: 1.2rem;
-    }
-
-    #product-category, #product-description {
-        font-size: 0.9rem;
-    }
+/* 상품 가격 스타일 */
+#product-price {
+    font-size: 1.8rem; /* 강조된 크기 */
+    color: #e74c3c; /* 밝은 빨간색 */
+    font-weight: bold; /* 강조 */
+    text-align: right; /* 오른쪽 정렬 */
+    margin-top: 20px; /* 상단 간격 */
 }

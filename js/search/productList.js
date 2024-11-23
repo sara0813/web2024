@@ -14,10 +14,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       const productItem = document.createElement("div");
       productItem.className = "product-item";
 
+      // 가격에 쉼표 추가
+      const formattedPrice = Number(product.price).toLocaleString("ko-KR");
+
       productItem.innerHTML = `
         <h3>${product.name}</h3>
         <img src="${product.images[0]}" alt="${product.name}" style="max-width: 200px;">
-        <p>가격: ${product.price}원</p>
+        <p>가격: ${formattedPrice}원</p>
       `;
 
       productItem.addEventListener("click", () => {
