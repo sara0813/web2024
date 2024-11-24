@@ -46,3 +46,22 @@ exports.getProducts = async (req, res) => {
     res.status(500).send("서버 오류가 발생했습니다.");
   }
 };
+
+// 상품 검색
+exports.searchProducts = async (req, res) => {
+  try {
+    const query = req.query.query || '';
+    const category = req.query.category || '';
+
+    const filter = {
+      ...(query && { name: { $regex: query, $options: 'i' } }),
+      ...(category && { category }),
+    };
+
+    const products = await Product.find(filter);
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error in searchProducts:", error);
+    res.status(500).json({ error: '검색 중 서버 오류가 발생했습니다.' });
+  }
+};

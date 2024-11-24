@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const { submitProduct, getProductsById, getProducts } = require('../controllers/productController');
+const { submitProduct, getProductsById, getProducts, searchProducts } = require('../controllers/productController');
 
 const router = express.Router();
 
@@ -36,5 +36,7 @@ router.get('/products/:id', async (req, res) => {
     res.status(500).json({ error: "서버 오류" });
   }
 });
+
+router.get('/search', searchProducts);
 
 module.exports = router;

@@ -40,12 +40,22 @@
     <div class="container">
         <section id="tab-content">
             <!-- 검색 폼 -->
-            <form id="search-form" action="search_results.html" method="get">
+            <form id="search-form">
                 <div class="form-group">
                     <label for="search-query">검색어</label>
                     <input type="text" id="search-query" name="query" placeholder="원하는 물품을 검색해보세요." required>
-                    <button type="submit">검색</button>
                 </div>
+                <div class="form-group">
+                    <label for="category">카테고리</label>
+                    <select id="category" name="category">
+                        <option value="">모든 카테고리</option>
+                        <option value="electronics">전자기기</option>
+                        <option value="books">책</option>
+                        <option value="clothing">의류</option>
+                    </select>
+                </div>
+                <button type="button" id="search-btn">검색</button>
+
             </form>
 
             <section id="search-results">
@@ -57,8 +67,8 @@
         </section>
     </div>
     <script src="../js/login/loginStatus.js"></script>
-    <script src="../js/search/productInfo.js"></script>
     <script src="../js/search/productList.js"></script>
     <script src="../js/search/productDetail.js"></script>
+    <script src="../js/search/search.js"></script>
 </body>
 </html>
