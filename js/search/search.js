@@ -25,15 +25,20 @@ document.getElementById('search-btn').addEventListener('click', async (event) =>
     }
 });
 
-// 검색 결과 렌더링
+
 function renderSearchResults(results) {
     const resultsContainer = document.getElementById('search-results');
     resultsContainer.innerHTML = ''; // 기존 결과 초기화
 
     if (results.length === 0) {
         resultsContainer.innerHTML = '<p>검색 결과가 없습니다.</p>';
+        resultsContainer.classList.remove('active'); // active 클래스 제거
         return;
     }
+
+    // 결과 그리드 컨테이너 생성
+    const gridContainer = document.createElement('div');
+    gridContainer.className = 'results-grid';
 
     results.forEach(product => {
         const productItem = document.createElement('div');
@@ -48,11 +53,14 @@ function renderSearchResults(results) {
             <p>가격: ${product.price.toLocaleString()}원</p>
         `;
 
-        resultsContainer.appendChild(productItem);
-
-        // 상세 페이지 이동 이벤트 추가
+        // 클릭 이벤트 추가 (상세 페이지 이동)
         productItem.addEventListener("click", () => {
             window.location.href = `/html/productDetail.html?id=${product._id}`;
         });
+
+        gridContainer.appendChild(productItem);
     });
+
+    resultsContainer.appendChild(gridContainer);
+    resultsContainer.classList.add('active'); // active 클래스 추가
 }
