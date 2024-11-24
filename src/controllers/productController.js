@@ -54,8 +54,12 @@ exports.searchProducts = async (req, res) => {
     const category = req.query.category || '';
 
     const filter = {
-      ...(query && { name: { $regex: query, $options: 'i' } }),
-      ...(category && { category }),
+      $or: [
+        { name: { $regex: query, $options: 'i' } },          // 제목 검색
+        { description: { $regex: query, $options: 'i' } },  // 내용 검색
+        { category: { $regex: query, $options: 'i' } },     // 카테고리 검색
+      ],
+      ...(category && { category }), // 특정 카테고리 필터 (옵션)
     };
 
     const products = await Product.find(filter);

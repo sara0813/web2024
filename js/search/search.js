@@ -1,12 +1,19 @@
 // 검색 버튼 클릭 이벤트
 document.getElementById('search-btn').addEventListener('click', async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // 버튼의 기본 동작 방지
 
-    const query = document.getElementById('search-query').value.trim();
-    const category = document.getElementById('category').value;
+    const query = document.getElementById('search-query').value.trim(); // 검색어 가져오기
+
+    if (!query) {
+        alert('검색어를 입력해주세요.');
+        return; // 검색어가 없으면 종료
+    }
 
     try {
-        const response = await fetch(`/api/search?query=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);
+        const response = await fetch(`/api/search?query=${encodeURIComponent(query)}`); // 검색 요청
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const results = await response.json();
 
         document.getElementById('product-list').style.display = 'none'; // 상품 리스트 숨기기
@@ -14,6 +21,7 @@ document.getElementById('search-btn').addEventListener('click', async (event) =>
         renderSearchResults(results);
     } catch (error) {
         console.error('검색 중 오류 발생:', error);
+        alert('검색 중 문제가 발생했습니다. 다시 시도해주세요.');
     }
 });
 
@@ -42,10 +50,9 @@ function renderSearchResults(results) {
 
         resultsContainer.appendChild(productItem);
 
+        // 상세 페이지 이동 이벤트 추가
         productItem.addEventListener("click", () => {
             window.location.href = `/html/productDetail.html?id=${product._id}`;
-          });
-    
-          productList.appendChild(productItem);
+        });
     });
 }
