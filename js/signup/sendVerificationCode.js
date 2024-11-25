@@ -1,5 +1,4 @@
 //sendVerificationCode.js
-
 function validateEmailDomain(email) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@seoultech.ac.kr$/; // 서울과학기술대학교 이메일 형식 정규식
     return emailPattern.test(email);

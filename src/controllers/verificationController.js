@@ -21,7 +21,12 @@ exports.sendVerificationCode = async (req, res) => {
                 user: process.env.NODEMAILER_USER,
                 pass: process.env.NODEMAILER_PASS,
             },
+            secure: false,
+            tls: {
+                rejectUnauthorized: false,
+            },
         });
+        
 
         const mailOptions = {
             from: process.env.NODEMAILER_USER,
