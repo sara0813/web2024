@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ST 마켓 - 마이페이지</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <script src="../js/tabs.js" defer></script>
 </head>
 <body>
@@ -38,7 +39,14 @@
     <div class="container">
         <section id="tab-content">
             <h2>마이페이지</h2>
-            <p>내 정보 및 거래 내역을 확인하세요.</p>
+
+            <div class="product-list">
+                <h3>내가 등록한 상품</h3>
+                <p id="no-products-message" style="display: none;">등록된 상품이 없습니다.</p>
+                <ul id="my-products">
+                    <!-- JavaScript로 동적으로 상품 추가 -->
+                </ul>
+            </div>
 
         </section>
     </div>
