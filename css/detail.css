@@ -34,6 +34,16 @@
     margin-right: auto;
 }
 
+#product-images {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #product-category {
     font-size: 0.8rem;
     color: #899194;

@@ -9,6 +9,7 @@ const fs = require('fs');
 const authRouter = require('./routes/authRoutes');
 const verificationRouter = require('./routes/verificationRouter');
 const productRoutes = require('./routes/productRoutes');
+const chatRouter = require('./routes/chatRouter');
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
@@ -39,6 +40,7 @@ app.use(session({
 app.use('/api/auth', authRouter);
 app.use('/api/verification', verificationRouter);
 app.use('/api', productRoutes);
+app.use('api/chat', chatRouter)
 
 // 업로드 폴더 설정
 const uploadDir = path.join(__dirname, '../uploads');

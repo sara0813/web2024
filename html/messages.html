@@ -37,6 +37,10 @@
     </nav>    
 
     <div class="container">
+        <div id="chat-list">
+            <!-- 채팅 목록 -->
+        </div>
+        
         <div id="chat-room" style="display: none;">
             <div id="messages"></div>
             <input type="text" id="message-input" placeholder="메시지를 입력하세요">
@@ -45,5 +49,6 @@
     </div>
     <script src="../js/login/loginStatus.js"></script>
     <script src="../js/messages/nochat.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 </body>
 </html>
