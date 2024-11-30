@@ -1,28 +1,17 @@
-const socket = io("http://localhost:8080"); // Socket.IO 서버와 연결
+const socket = io('http://localhost:8080');
 
-// 채팅 시작
-function startChat(productId) {
-    // 상품 ID를 방 ID로 사용
-    socket.emit("joinRoom", { roomId: productId });
-    document.getElementById("chat-room").style.display = "block";
-}
-
-// 메시지 전송
-document.getElementById("send-btn").addEventListener("click", () => {
-    const message = document.getElementById("message-input").value.trim();
-    const productId = document.getElementById("chat-room").dataset.roomId; // 방 ID 가져오기
-    if (message) {
-        socket.emit("chatMessage", { roomId: productId, message });
-        document.getElementById("message-input").value = "";
-    }
-});
-
-// 서버에서 메시지 수신 처리
-socket.on("chatMessage", (data) => {
-    const { message } = data;
-    const messagesDiv = document.getElementById("messages");
-    const newMessage = document.createElement("div");
-    newMessage.className = "message";
+socket.on('chatMessage', (data) => {
+  const { roomId, message } = data;
+  const messagesDiv = document.getElementById(`chat-messages-${roomId}`);
+  if (messagesDiv) {
+    const newMessage = document.createElement('div');
+    newMessage.className = 'chat-message other';
     newMessage.textContent = message;
     messagesDiv.appendChild(newMessage);
+
+    // 최신 메시지로 스크롤
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  } else {
+    console.error(`No chat-messages container found for roomId: ${roomId}`);
+  }
 });

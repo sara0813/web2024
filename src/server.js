@@ -5,6 +5,8 @@ const mongoose = require("mongoose")
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
+const http = require("http");
+const { Server } = require("socket.io");
 
 const authRouter = require('./routes/authRoutes');
 const verificationRouter = require('./routes/verificationRouter');
@@ -15,6 +17,9 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const app = express();
 const port = 8080;
+
+const server = http.createServer(app);
+const io = new Server(server);
 
 // 기본 라우트 설정
 app.get('/', (req, res) => {
@@ -40,7 +45,7 @@ app.use(session({
 app.use('/api/auth', authRouter);
 app.use('/api/verification', verificationRouter);
 app.use('/api', productRoutes);
-app.use('api/chat', chatRouter)
+app.use('/api/chat', chatRouter);
 
 // 업로드 폴더 설정
 const uploadDir = path.join(__dirname, '../uploads');
@@ -66,6 +71,6 @@ app.use((req, res, next) => {
 
 
 // 서버 시작
-app.listen(port, '0.0.0.0', () => {
+server.listen(port, '0.0.0.0', () => {
     console.log(`서버가 http://0.0.0.0:${port} 에서 실행 중입니다.`);
 });

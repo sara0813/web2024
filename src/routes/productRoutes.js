@@ -25,15 +25,15 @@ router.get('/products', getProducts);
 
 router.get('/products/:id', async (req, res) => {
   try {
-    const product = await getProductsById(req.params.id); // ID로 상품 검색
-    if (product) {
-      res.json(product);
-    } else {
-      res.status(404).json({ error: "상품을 찾을 수 없습니다." });
-    }
+      const product = await getProductsById(req.params.id); // ID로 상품 검색
+      if (product) {
+          res.json({ id: product._id, ...product._doc }); // ID가 포함되도록 수정
+      } else {
+          res.status(404).json({ error: "상품을 찾을 수 없습니다." });
+      }
   } catch (error) {
-    console.error('Error fetching product:', error);
-    res.status(500).json({ error: "서버 오류" });
+      console.error('Error fetching product:', error);
+      res.status(500).json({ error: "서버 오류" });
   }
 });
 
