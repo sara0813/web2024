@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -18,24 +18,38 @@
             <button id="logout-btn" onclick="location.href='/index.html'">로그아웃</button>
         </div>
     </header>
+
+    <!-- 상품 상세 정보 -->
     <div id="productDetail">
         <h1 id="product-name"></h1>
-        <img id="product-image" alt="상품 이미지를 불러오는 중 문제가 발생했습니다.">
-        <div id="product-images"></div>
+        <div id="product-image">
+            <img id="product-image-tag" alt="상품 이미지" />
+        </div>
+        <div id="product-images" class="image-gallery"></div>        
         <p id="product-category"></p>
         <p id="product-description"></p>
         <div id="button-container">
             <button id="back-btn" onclick="history.back()">뒤로가기</button>
             <p id="product-price"></p>
-            <button id="chat-btn">채팅하기</button>
+            <button id="chat-btn" onclick="openChat()">채팅하기</button>
         </div>
     </div>
-    <div id="chat-container"></div>
+    
+    <div id="chat-window" class="hidden">
+        <div id="chat-header">
+            <h3 id="chat-room-title">채팅</h3>
+            <button id="close-chat-btn">닫기</button>
+        </div>
+        <div id="chat-messages"></div>
+        <div id="chat-input-container">
+            <input id="chat-input" type="text" placeholder="메시지를 입력하세요">
+            <button id="send-chat-btn">보내기</button>
+        </div>
+    </div>
+    
+
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-    <script src="../js/messages/socket.js"></script>
-    <script src="../js/messages/openChatRoom.js"></script>
     <script src="../js/messages/chat.js"></script>
-    <script src="../js/messages/messages.js"></script>
     <script src="../js/search/productDetail.js"></script>
 </body>
 </html>

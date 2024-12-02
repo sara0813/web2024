@@ -22,16 +22,36 @@
     word-wrap: break-word;
 }
 
-/* 상품 이미지 */
-#product-image {
-    width: 100%;
-    max-width: 500px;
+.image-gallery {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.image-gallery img {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.1);
+    border-color: #224d89;
+}
+
+#product-image img {
+    max-width: 100%;
     height: auto;
     border-radius: 12px;
-    margin: 20px auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: block;
+    margin-bottom: 15px;
 }
+
 
 /* 상품 상세 설명 */
 #product-description {
@@ -51,6 +71,18 @@
     margin-top: 20px;
 }
 
+#product-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
 #back-btn, #chat-btn {
     padding: 12px 20px;
     border: none;
@@ -63,7 +95,7 @@
 
 #back-btn {
     background-color: #7f8c8d;
-    color: white;
+    color: #fff;
 }
 
 #back-btn:hover {
@@ -72,29 +104,38 @@
 
 #chat-btn {
     background-color: #224d89;
-    color: white;
+    color: #fff;
 }
 
 #chat-btn:hover {
     background-color: #1a3b6f;
 }
 
-/* 채팅 창 스타일 */
+/* 채팅창 스타일 */
 #chat-window {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
-    width: 360px;
+    bottom: 10px;
+    right: 10px;
+    width: 350px;
     height: 500px;
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    display: flex;
+    display: none;
     flex-direction: column;
     z-index: 1000;
 }
 
+#chat-window.active {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 채팅창 내부 */
 #chat-header {
     background-color: #224d89;
     color: white;
@@ -106,9 +147,26 @@
     border-radius: 12px 12px 0 0;
 }
 
+#chat-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+#close-chat-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#close-chat-btn:hover {
+    color: #ddd;
+}
+
 #chat-messages {
     flex: 1;
-    padding: 15px;
+    padding: 10px;
     overflow-y: auto;
     background-color: #f9f9f9;
 }
@@ -118,18 +176,20 @@
     padding: 10px 15px;
     border-radius: 20px;
     font-size: 0.9rem;
-    word-wrap: break-word;
     margin: 8px 0;
+    word-wrap: break-word;
 }
 
 .chat-message.self {
-    align-self: flex-end;
     background-color: #d0fdd0;
+    align-self: flex-end;
+    text-align: right;
 }
 
 .chat-message.other {
-    align-self: flex-start;
     background-color: #e6f7ff;
+    align-self: flex-start;
+    text-align: left;
 }
 
 #chat-input-container {
@@ -144,11 +204,12 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
+    font-size: 1rem;
 }
 
-#send-message {
+#send-chat-btn {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: #224d89;
     color: white;
     border: none;
     border-radius: 20px;
@@ -156,14 +217,14 @@
     cursor: pointer;
 }
 
-#send-message:hover {
-    background-color: #0056b3;
+#send-chat-btn:hover {
+    background-color: #1a3b6f;
 }
 
-/* 반응형 */
+/* 반응형 스타일 */
 @media (max-width: 768px) {
     #productDetail {
-        margin: 100px 15px 20px;
+        margin: 100px 15px;
         padding: 20px;
     }
 
@@ -172,5 +233,11 @@
         height: 400px;
         bottom: 10px;
         right: 5%;
+    }
+
+    #chat-messages {
+        padding: 10px;
+        height: 300px;
+        overflow-y: auto;
     }
 }

@@ -1,3 +1,27 @@
+const { Chat } = require("../models/chat");
+
+// 채팅방 생성 컨트롤러
+exports.createChatRoom = async (req, res) => {
+    const { productId, userId } = req.body;
+
+    if (!productId || !userId) {
+        return res.status(400).json({ error: "상품 ID와 사용자 ID는 필수입니다." });
+    }
+
+    try {
+        let chatRoom = await Chat.findOne({ productId, users: { $all: [userId] } });
+        if (!chatRoom) {
+            chatRoom = new Chat({ productId, users: [userId] });
+            await chatRoom.save();
+        }
+
+        res.json({ roomId: chatRoom._id });
+    } catch (error) {
+        console.error("채팅방 생성 오류:", error);
+        res.status(500).json({ error: "채팅방 생성 중 오류가 발생했습니다." });
+    }
+};
+
 exports.handleConnection = (io) => {
     io.on('connection', (socket) => {
         console.log('사용자가 연결되었습니다:', socket.id);

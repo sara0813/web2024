@@ -1,73 +1,50 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    console.log("DOMContentLoaded triggered"); // 디버깅용 로그
-
-    const productDetail = document.getElementById("productDetail");
-
-    // `productDetail` 요소 확인
-    if (!productDetail) {
-        console.error("Error: Element with ID 'productDetail' not found!");
-        return;
-    }
-
     const params = new URLSearchParams(window.location.search);
     const productId = params.get("id");
 
-    // URL에 `id` 파라미터가 없을 경우
-    if (!productId) {
-        productDetail.innerHTML = "<p>상품 정보를 찾을 수 없습니다.</p>";
-        return;
-    }
+    const productDetail = document.getElementById("productDetail");
+    const chatWindow = document.getElementById("chat-window");
+    const chatBtn = document.getElementById("chat-btn");
+    const closeChatBtn = document.getElementById("close-chat-btn");
+    const chatMessages = document.getElementById("chat-messages");
+    const chatInput = document.getElementById("chat-input");
+    const sendChatBtn = document.getElementById("send-chat-btn");
 
+    // 상품 상세 정보 로드
     try {
         const response = await fetch(`/api/products/${productId}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error("상품 데이터를 불러오는 중 오류가 발생했습니다.");
         const product = await response.json();
 
-        // DOM 요소 설정
-        const productName = document.getElementById("product-name");
-        const productPrice = document.getElementById("product-price");
-        const productCategory = document.getElementById("product-category");
-        const productDescription = document.getElementById("product-description");
-        const productImage = document.getElementById("product-image");
-        const chatBtn = document.getElementById("chat-btn");
-
-        // 요소가 모두 존재하는지 확인
-        if (!productName || !productPrice || !productCategory || !productDescription || !productImage || !chatBtn) {
-            console.error("Error: One or more product elements are missing!");
-            return;
-        }
-
-        // 데이터 설정
-        productName.textContent = product.name || "상품 이름 없음";
-        productPrice.textContent = `${Number(product.price).toLocaleString("ko-KR") || 0}원`;
-        productCategory.textContent = `카테고리: ${product.category || "없음"}`;
-        productDescription.textContent = product.description || "설명이 없습니다.";
-        productImage.src = product.images?.[0] || "/path/to/default-image.png";
-
-        // 채팅 버튼 이벤트 설정
-        chatBtn.addEventListener("click", () => {
-            const chatList = JSON.parse(localStorage.getItem("chatList")) || [];
-            const newChat = {
-                id: product.id || "fallback-id",
-                name: product.name,
-                image: product.images?.[0] || "/path/to/default-image.png",
-            };
-
-            console.log("Final Chat Object:", newChat); // 디버깅용 로그
-
-            const chatExists = chatList.some((chat) => chat.id === newChat.id);
-            if (!chatExists) {
-                chatList.push(newChat);
-                localStorage.setItem("chatList", JSON.stringify(chatList));
-            }
-
-            openChatRoom(newChat);
-        });
+        document.getElementById("product-name").textContent = product.name || "상품 이름 없음";
+        document.getElementById("product-price").textContent = `${Number(product.price).toLocaleString()}원`;
+        document.getElementById("product-category").textContent = `카테고리: ${product.category || "없음"}`;
+        document.getElementById("product-description").textContent = product.description || "설명이 없습니다.";
+        document.getElementById("product-image-tag").src = product.images?.[0] || "/uploads/default-image.png";
     } catch (error) {
-        console.error("Error fetching product data:", error);
-        productDetail.innerHTML = "<p>상품 정보를 불러오는 중 오류가 발생했습니다.</p>";
+        console.error("상품 정보를 불러오는 중 오류:", error);
     }
+
+    // 채팅 열기
+    chatBtn.addEventListener("click", () => {
+        chatWindow.classList.add("active");
+    });
+
+    // 채팅 닫기
+    closeChatBtn.addEventListener("click", () => {
+        chatWindow.classList.remove("active");
+    });
+
+    // 메시지 전송
+    sendChatBtn.addEventListener("click", () => {
+        const message = chatInput.value.trim();
+        if (message) {
+            const newMessage = document.createElement("div");
+            newMessage.className = "chat-message self";
+            newMessage.textContent = message;
+            chatMessages.appendChild(newMessage);
+            chatInput.value = "";
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    });
 });

@@ -65,13 +65,6 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => console.log('MongoDB 연결 오류:',err));
 
 //확인용
-console.log(process.env.MONGO_URI);
-console.log('JWT_SECRET:', process.env.JWT_SECRET);
-app.use((req, res, next) => {
-  console.log(`Request: ${req.method} ${req.url}`);
-  next();
-});
-
 
 // 서버 시작
 server.listen(port, '0.0.0.0', () => {
