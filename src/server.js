@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const http = require("http");
 const { Server } = require("socket.io");
+const Chat = require("./models/chats");
 
 const authRouter = require('./routes/authRoutes');
 const verificationRouter = require('./routes/verificationRouter');
@@ -39,25 +40,35 @@ if (!fs.existsSync(uploadDir)) {
 const server = http.createServer(app);
 const io = new Server(server);
 io.on("connection", (socket) => {
-    console.log("사용자가 연결되었습니다:", socket.id);
+  console.log("사용자가 연결되었습니다:", socket.id);
 
-    // 방 입장
-    socket.on("joinRoom", async ({ roomId }) => {
-        if (!roomId) {
-            console.error("Error: roomId is undefined on joinRoom event!");
-            return;
-        }
-        socket.join(roomId);
-        console.log(`사용자 ${socket.id}가 방 ${roomId}에 입장했습니다.`);
-    });
+  socket.on("joinRoom", async ({ roomId }) => {
+      if (!roomId || !mongoose.Types.ObjectId.isValid(roomId)) {
+          console.error("유효하지 않은 roomId입니다.");
+          return;
+      }
+      socket.join(roomId);
+      console.log(`사용자 ${socket.id}가 방 ${roomId}에 입장했습니다.`);
+  });
 
-    // 메시지 송수신
-    socket.on("chatMessage", async ({ roomId, sender, text }) => {
+  socket.on("chatMessage", async ({ roomId, sender, text }) => {
       try {
+          if (!Chat) {
+              console.error("Chat 모델이 정의되지 않았습니다.");
+              return;
+          }
+          if (!roomId || !mongoose.Types.ObjectId.isValid(roomId)) {
+              console.error("유효하지 않은 roomId입니다.");
+              return;
+          }
+          if (!sender || !text) {
+              console.error("필수 데이터 누락: sender 또는 text가 없습니다.");
+              return;
+          }
+
           const message = { sender, text, timestamp: new Date() };
-  
-          // 메시지 저장
           const chatRoom = await Chat.findById(roomId);
+
           if (!chatRoom) {
               const newChat = new Chat({ productId: roomId, users: [sender], messages: [message] });
               await newChat.save();
@@ -65,19 +76,16 @@ io.on("connection", (socket) => {
               chatRoom.messages.push(message);
               await chatRoom.save();
           }
-  
-          // 메시지 전송
+
           io.to(roomId).emit("chatMessage", message);
       } catch (error) {
           console.error("메시지 전송 오류:", error);
       }
-  });    
-    
+  });
 
-    // 연결 해제
-    socket.on("disconnect", () => {
-        console.log("사용자가 연결을 종료했습니다:", socket.id);
-    });
+  socket.on("disconnect", () => {
+      console.log("사용자가 연결을 종료했습니다:", socket.id);
+  });
 });
 
 
