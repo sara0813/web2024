@@ -17,28 +17,35 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         const product = await response.json();
 
-        // 상품 정보 표시
-        document.getElementById("product-name").textContent = product.name;
-        document.getElementById("product-price").textContent = `${Number(product.price).toLocaleString("ko-KR")}원`;
-        document.getElementById("product-category").textContent = `카테고리: ${product.category}`;
-        document.getElementById("product-description").textContent = product.description;
-
-        // 이미지 처리
+        // 각 요소를 가져오기 전에 null 확인
+        const productNameElement = document.getElementById("product-name");
+        const productPriceElement = document.getElementById("product-price");
+        const productCategoryElement = document.getElementById("product-category");
+        const productDescriptionElement = document.getElementById("product-description");
         const productImageTag = document.getElementById("product-image-tag");
         const productImagesContainer = document.getElementById("product-images");
 
+        if (!productNameElement || !productPriceElement || !productCategoryElement || !productDescriptionElement || !productImageTag || !productImagesContainer) {
+            throw new Error("필수 DOM 요소가 누락되었습니다.");
+        }
+
+        // 상품 정보 표시
+        productNameElement.textContent = product.name;
+        productPriceElement.textContent = `${Number(product.price).toLocaleString("ko-KR")}원`;
+        productCategoryElement.textContent = `카테고리: ${product.category}`;
+        productDescriptionElement.textContent = product.description;
+
+        // 이미지 처리
         if (product.images && product.images.length > 0) {
-            // 첫 번째 이미지를 메인 이미지로 설정
             productImageTag.src = product.images[0];
 
-            // 나머지 이미지를 썸네일로 추가
             product.images.forEach((image, index) => {
                 const thumbnail = document.createElement("img");
                 thumbnail.src = image;
                 thumbnail.alt = `상품 이미지 ${index + 1}`;
                 thumbnail.className = "thumbnail";
                 thumbnail.addEventListener("click", () => {
-                    productImageTag.src = image; // 클릭 시 메인 이미지 변경
+                    productImageTag.src = image;
                 });
                 productImagesContainer.appendChild(thumbnail);
             });
@@ -55,13 +62,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 image: product.images?.[0] || "/uploads/default-image.png",
             };
 
-            // 중복 채팅방 확인
             if (!chatList.some((chat) => chat.id === newChat.id)) {
                 chatList.push(newChat);
                 localStorage.setItem("chatList", JSON.stringify(chatList));
             }
 
-            // 채팅방 열기
             openChatRoom(newChat);
         });
     } catch (error) {

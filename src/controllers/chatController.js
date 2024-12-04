@@ -1,51 +1,53 @@
-const { Chat } = require("../models/chat");
+// 서버: controllers/chatController.js
+const { Chat } = require("../models/chats");
+const mongoose = require("mongoose");
 
-// 채팅방 생성 컨트롤러
-exports.createChatRoom = async (req, res) => {
-    const { productId, userId } = req.body;
+// 메시지 저장 컨트롤러
+exports.saveMessage = async (req, res) => {
+    const { roomId, sender, text } = req.body;
 
-    if (!productId || !userId) {
-        return res.status(400).json({ error: "상품 ID와 사용자 ID는 필수입니다." });
+    // roomId 디버깅
+    console.log("getMessages - roomId:", roomId);
+
+
+    if (!roomId || !sender || !text) {
+        return res.status(400).json({ error: "roomId, sender, text는 필수입니다." });
     }
 
     try {
-        let chatRoom = await Chat.findOne({ productId, users: { $all: [userId] } });
+        const chatRoom = await Chat.findById(mongoose.Types.ObjectId(roomId));
         if (!chatRoom) {
-            chatRoom = new Chat({ productId, users: [userId] });
-            await chatRoom.save();
+            return res.status(404).json({ error: "채팅방을 찾을 수 없습니다." });
         }
 
-        res.json({ roomId: chatRoom._id });
+        // 메시지 추가
+        chatRoom.messages.push({ sender, text });
+        await chatRoom.save(); // 저장
+
+        res.status(200).json({ success: true });
     } catch (error) {
-        console.error("채팅방 생성 오류:", error);
-        res.status(500).json({ error: "채팅방 생성 중 오류가 발생했습니다." });
+        console.error("메시지 저장 오류:", error);
+        res.status(500).json({ error: "메시지 저장 중 오류가 발생했습니다." });
     }
 };
 
-exports.handleConnection = (io) => {
-    io.on('connection', (socket) => {
-        console.log('사용자가 연결되었습니다:', socket.id);
-      
-        socket.on('joinRoom', ({ roomId }) => {
-            if (!roomId) {
-                console.error('Error: roomId is undefined on joinRoom event!');
-                return;
-            }
-            socket.join(roomId);
-            console.log(`사용자 ${socket.id}가 방 ${roomId}에 입장했습니다.`);
-        });
-      
-        socket.on('chatMessage', (data) => {
-            if (!data.roomId || !data.message) {
-                console.error('Error: roomId or message is undefined in chatMessage event!');
-                return;
-            }
-            console.log(`방 ${data.roomId}에서 받은 메시지: ${data.message}`);
-            io.to(data.roomId).emit('chatMessage', { roomId: data.roomId, message: data.message });
-        });
-      
-        socket.on('disconnect', () => {
-            console.log('사용자가 연결을 종료했습니다:', socket.id);
-        });
-    });
+// 채팅 기록 가져오기
+exports.getMessages = async (req, res) => {
+    const { roomId } = req.params;
+
+    if (!roomId) {
+        return res.status(400).json({ error: "roomId는 필수입니다." });
+    }
+
+    try {
+        const chatRoom = await Chat.findById(roomId);
+        if (!chatRoom) {
+            return res.status(404).json({ error: "채팅방을 찾을 수 없습니다." });
+        }
+
+        res.status(200).json(chatRoom.messages);
+    } catch (error) {
+        console.error("메시지 조회 오류:", error);
+        res.status(500).json({ error: "메시지 조회 중 오류가 발생했습니다." });
+    }
 };

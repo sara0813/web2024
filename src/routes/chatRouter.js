@@ -1,8 +1,12 @@
 const express = require("express");
-const { createChatRoom } = require("../controllers/chatController");
+const { saveMessage, getMessages } = require("../controllers/chatController");
 const router = express.Router();
 
-// 채팅방 생성 라우트
-router.post("/create", createChatRoom);
+router.post("/messages", saveMessage);
+router.get("/messages/:roomId", (req, res, next) => {
+    console.log("요청 URL:", req.originalUrl);
+    console.log("roomId:", req.params.roomId);
+    next();
+}, getMessages);
 
 module.exports = router;
