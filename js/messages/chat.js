@@ -13,6 +13,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Socket.IO 연결
     const socket = io();
 
+    // 서버에서 메시지 수신 (중복 등록 방지)
+    socket.on("chatMessage", (message) => {
+        if (message.sender !== "self") {
+            const newMessage = document.createElement("div");
+            newMessage.className = message.sender === "self" ? "chat-message self" : "chat-message other";
+            newMessage.innerHTML = `
+                <div class="message-sender">${message.sender}</div>
+                <div class="message-text">${message.text}</div>
+                <div class="message-timestamp">${new Date(message.timestamp).toLocaleString()}</div>
+            `;
+            chatMessages.appendChild(newMessage);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    });
+
     // 상품 상세 정보 로드
     try {
         const response = await fetch(`/api/products/${productId}`);
@@ -56,19 +71,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Socket.IO를 통해 채팅방 입장
         socket.emit("joinRoom", { roomId: productId });
-
-        // 서버에서 메시지 수신
-        socket.on("chatMessage", (message) => {
-            const newMessage = document.createElement("div");
-            newMessage.className = message.sender === "self" ? "chat-message self" : "chat-message other";
-            newMessage.innerHTML = `
-                <div class="message-sender">${message.sender}</div>
-                <div class="message-text">${message.text}</div>
-                <div class="message-timestamp">${new Date(message.timestamp).toLocaleString()}</div>
-            `;
-            chatMessages.appendChild(newMessage);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        });
     });
 
     // 채팅 닫기
@@ -83,18 +85,22 @@ document.addEventListener("DOMContentLoaded", async () => {
             const roomId = productId;
             const sender = "self"; // 현재 사용자를 "self"로 표시
 
-            // Socket.IO를 통해 메시지 전송
-            socket.emit("chatMessage", { roomId, sender, text: message });
-
             // 화면에 즉시 반영
             const newMessage = document.createElement("div");
             newMessage.className = "chat-message self";
             newMessage.innerHTML = `
+                <div class="message-sender">${sender}</div>
                 <div class="message-text">${message}</div>
+                <div class="message-timestamp">${new Date().toLocaleString()}</div>
             `;
             chatMessages.appendChild(newMessage);
-            chatInput.value = "";
             chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Socket.IO를 통해 메시지 전송
+            socket.emit("chatMessage", { roomId, sender, text: message });
+
+            // 입력 필드 초기화
+            chatInput.value = "";
         }
     });
 });

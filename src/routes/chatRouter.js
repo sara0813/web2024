@@ -1,12 +1,10 @@
 const express = require("express");
-const { saveMessage, getMessages } = require("../controllers/chatController");
+const { saveMessage, getMessages, getChatList } = require("../controllers/chatController");
+const authMiddleware = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 router.post("/messages", saveMessage);
-router.get("/messages/:roomId", (req, res, next) => {
-    console.log("요청 URL:", req.originalUrl);
-    console.log("roomId:", req.params.roomId);
-    next();
-}, getMessages);
+router.get("/messages/:roomId", getMessages);
+router.get("/list", authMiddleware, getChatList);
 
 module.exports = router;

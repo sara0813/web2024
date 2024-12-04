@@ -27,7 +27,7 @@
         <input type="radio" id="tab-search" name="tab" onclick="f2()">
         <label for="tab-search">상품 검색</label>
     
-        <input type="radio" id="tab-messages" name="tab"onclick="f3()" checked>
+        <input type="radio" id="tab-messages" name="tab" onclick="f3()" checked>
         <label for="tab-messages">채팅</label>
     
         <input type="radio" id="tab-profile" name="tab" onclick="f4()">
@@ -37,14 +37,13 @@
     </nav>    
 
     <div class="container">
+        <!-- 채팅 목록 -->
         <div id="chat-list"></div>
         
+        <!-- 채팅방 -->
         <div id="chat-room" style="display: none;">
-            
             <div id="chat-room-header"></div>
-
             <div id="messages"></div>
-            
             <div id="chat-input-container">
                 <input id="message-input" type="text" placeholder="메시지를 입력하세요">
                 <button id="send-btn">보내기</button>

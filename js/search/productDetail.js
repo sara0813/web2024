@@ -5,9 +5,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const productDetail = document.getElementById("productDetail");
 
     if (!productId) {
-        productDetail.innerHTML = "<p>상품 정보를 찾을 수 없습니다.</p>";
+        console.error("URL에서 productId가 누락되었습니다.");
+        document.getElementById("productDetail").innerHTML = "<p>상품 ID가 누락되었습니다.</p>";
         return;
     }
+    console.log("Fetched productId:", productId);
 
     try {
         // API 호출

@@ -6,6 +6,8 @@ exports.getProductsById = async (id) => {
 
 exports.submitProduct = async (req, res) => {
   try {
+    console.log("Received productId:", req.params.id);
+    
     const {name, category, description, price } = req.body;
 
     // 이미지 파일 처리: 절대 경로 대신 상대 경로 저장
