@@ -259,3 +259,15 @@
         overflow-y: auto;
     }
 }
+
+/* 상품 상세 설명 */
+#product-description {
+    font-size: 1.1rem;
+    color: #34495e;
+    line-height: 1.6;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    white-space: pre-wrap; /* 줄바꿈과 공백을 유지 */
+    word-wrap: break-word; /* 긴 단어를 줄바꿈 */
+}

@@ -198,3 +198,40 @@
         height: 40px;
     }
 }
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-item:hover {
+    background-color: #f9f9f9;
+}
+
+/* 채팅 이미지 */
+.chat-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* 채팅 세부 정보 */
+.chat-details {
+    flex: 1;
+}
+
+.chat-name {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.chat-last-message {
+    font-size: 0.9rem;
+    color: #666;
+}
