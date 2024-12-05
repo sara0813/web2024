@@ -13,6 +13,7 @@ const authRouter = require('./routes/authRoutes');
 const verificationRouter = require('./routes/verificationRouter');
 const productRoutes = require('./routes/productRoutes');
 const chatRouter = require('./routes/chatRouter');
+const deletRouter = require("./routes/deletRouter");
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
@@ -103,6 +104,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/verification', verificationRouter);
 app.use('/api', productRoutes);
 app.use('/api/chat', chatRouter);
+app.use('/api/users', deletRouter);
 
 //몽고bd 연결 코드
 mongoose.connect(process.env.MONGO_URI)
